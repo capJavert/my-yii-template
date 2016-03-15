@@ -6,7 +6,10 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "pendalf89/yii2-tinymce": "dev-master",
+        "pendalf89/yii2-filemanager": "dev-master",
+        "cakebake/yii2-less.php": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
