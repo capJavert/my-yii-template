@@ -2,6 +2,7 @@
     "name": "capJavert/my-yii-template",
     "description": "yii2 template",
     "type": "project",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
