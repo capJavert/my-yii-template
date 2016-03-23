@@ -78,6 +78,8 @@ class ApiController extends Controller
             }
         }
 
+        $model->validate();
+
         return BaseJson::encode(['errors'=>$model->getErrors()]);
     }
 
@@ -94,6 +96,8 @@ class ApiController extends Controller
         if ($model->load(Yii::$app->request->get(), '') && $model->login()) {
             return BaseJson::encode(['token'=>$model->getUser()->getAuthKey()]);
         }
+
+        $model->validate();
 
         return BaseJson::encode(['errors'=>$model->getErrors()]);
     }
