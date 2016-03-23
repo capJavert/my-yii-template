@@ -9,15 +9,15 @@ HOW TO?? :D
 
 API
 
-signup: /api/signup?username={username}&password={password}&email={email}
-login: /api/login?username={username}&password={password}
-logout: /api/find?token={token}&modelName={modelName}
-logout: /api/logout?token={token}
-
+<b>signup</b>: /api/signup?username={username}&password={password}&email={email}<br />
+<b>login</b>: /api/login?username={username}&password={password}<br />
+<b>logout</b>: /api/find?token={token}&modelName={modelName}<br />
+<b>logout</b>: /api/logout?token={token}<br />
+<br />
 FAQ API
 
-signup: signs user up, returns json with errors on fail, on success returns access token token is valid until /api/logout
-login: login user up, returns json with errors on fail, on success returns access token token is valid until /api/logout
-logout: logout user, returns json with errors on fail, on success returns json success message
-find: returns json with errors on fail, on success returns json data example:
-    /api/find?token={token}&modelName=User -> returns json array of existing usernames
+<b>signup</b>: signs user up, returns json with errors on fail, on success returns access token token is valid until /api/logout<br />
+<b>login</b>: login user up, returns json with errors on fail, on success returns access token token is valid until /api/logout<br />
+<b>logout</b>: logout user, returns json with errors on fail, on success returns json success message<br />
+<b>find</b>: returns json with errors on fail, on success returns json data example:<br />
+    /api/find?token={token}&modelName=User -> returns json array of existing usernames<br />
