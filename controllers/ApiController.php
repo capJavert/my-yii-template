@@ -18,17 +18,6 @@ class ApiController extends Controller
         Yii::$app->request->enableCsrfValidation = false;
 
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'login', 'signup', 'find'],
-                'rules' => [
-                    [
-                        'actions' =>['logout', 'login', 'signup', 'find'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
