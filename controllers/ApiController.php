@@ -62,7 +62,7 @@ class ApiController extends Controller
         if ($model->load(Yii::$app->request->get(), '')) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $user->getAuthKey();
+                    return BaseJson::encode(['token'=>$user->getAuthKey()]);
                 }
             }
         }
