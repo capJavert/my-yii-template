@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\File;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -159,7 +160,15 @@ class ApiController extends Controller
 
     public function actionUpload() {
         if ($_FILES) {
-            return BaseJson::encode(['ok'=>'da']);
+            $target_dir = "images/";
+            $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+            // Check if image file is a actual image or fake image
+            $check = getimagesize($_FILES["picture"]["tmp_name"]);
+            if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
+                return BaseJson::encode(['ok'=>'da']);
+            } else {
+                return BaseJson::encode(['ok'=>'ne']);
+            }
         } else
             return BaseJson::encode(['ok'=>'ne']);
     }
