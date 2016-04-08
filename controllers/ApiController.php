@@ -146,14 +146,28 @@ class ApiController extends Controller
         /* @var $apnsGcm \bryglen\apnsgcm\Gcm */
         $gcm = Yii::$app->gcm;
 
-        $gcm->send(['12345'], 'lalalalal',
-            [
-                'customerProperty' => 1,
-            ],
+        $tokens = [
+          'f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT'
+        ];
+
+        $message = ['title'=>'junfer', 'message'=>'loolololololo'];
+
+        $gcm->send($tokens, BaseJson::encode($message),
             [
                 'timeToLive' => 3
             ]
         );
+
+        $gcm->send($tokens, BaseJson::encode($message));
+
+        $gcm->send('f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT', BaseJson::encode($message));
+
+        $gcm->send('f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT', BaseJson::encode($message),
+            [
+                'timeToLive' => 3
+            ]
+        );
+
 
         return 1;
     }
@@ -165,11 +179,10 @@ class ApiController extends Controller
             // Check if image file is a actual image or fake image
             $check = getimagesize($_FILES["picture"]["tmp_name"]);
             if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-                return BaseJson::encode(['ok'=>'da']);
-            } else {
-                return BaseJson::encode(['ok'=>'ne']);
-            }
+                return BaseJson::encode(['file'=>'SUCCESS_UPLOADED']);
+            } else
+                return BaseJson::encode(['error'=>'ERROR_NO_FILE']);
         } else
-            return BaseJson::encode(['ok'=>'ne']);
+            return BaseJson::encode(['error'=>'ERROR_NO_FILE']);
     }
 }
