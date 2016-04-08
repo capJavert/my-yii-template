@@ -139,4 +139,20 @@ class ApiController extends Controller
 
         return BaseJson::encode($data);
     }
+
+    public function actionTestgcm() {
+        /* @var $apnsGcm \bryglen\apnsgcm\Gcm */
+        $gcm = Yii::$app->gcm;
+
+        $gcm->send(['12345'], 'lalalalal',
+            [
+                'customerProperty' => 1,
+            ],
+            [
+                'timeToLive' => 3
+            ]
+        );
+
+        return 1;
+    }
 }
