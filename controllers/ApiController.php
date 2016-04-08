@@ -150,24 +150,11 @@ class ApiController extends Controller
           'f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT'
         ];
 
-        $message = ['title'=>'junfer', 'message'=>'loolololololo'];
+        $message = ['title'=>'PRO', 'message'=>'good night'];
 
-        $gcm->send($tokens, BaseJson::encode($message),
-            [
-                'timeToLive' => 3
-            ]
+        $gcm->send('f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT',
+            BaseJson::encode($message)
         );
-
-        $gcm->send($tokens, BaseJson::encode($message));
-
-        $gcm->send('f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT', BaseJson::encode($message));
-
-        $gcm->send('f4qCXUaakIk:APA91bGdiFKym-Kizf_5K9tz05FFMlVO36nLvDwNJjkzak7STSgulLaCMeEZguN54zYikp23P0KCkys7zTZRaV5C8XsU_iY76o33mDDYa2r0D_Cq6w8SdZjJmSBmYzFPCgiusE8RkNQT', BaseJson::encode($message),
-            [
-                'timeToLive' => 3
-            ]
-        );
-
 
         return 1;
     }
