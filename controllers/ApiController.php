@@ -25,6 +25,7 @@ class ApiController extends Controller
                     'signup' => ['get'],
                     'find' => ['get'],
                     'login' => ['get'],
+                    'upload' => ['post'],
                 ],
             ],
         ];
@@ -154,5 +155,12 @@ class ApiController extends Controller
         );
 
         return 1;
+    }
+
+    public function actionUpload() {
+        if ($_FILES) {
+            return BaseJson::encode($_FILES);
+        } else
+            return BaseJson::encode(['errors'=>'ERROR_NO_POST']);
     }
 }
