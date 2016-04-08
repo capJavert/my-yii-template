@@ -159,8 +159,8 @@ class ApiController extends Controller
 
     public function actionUpload() {
         if ($_FILES) {
-            return BaseJson::encode($_FILES);
+            return BaseJson::encode(['ok'=>'da']);
         } else
-            return BaseJson::encode(['errors'=>'ERROR_NO_POST']);
+            return BaseJson::encode(['ok'=>'ne']);
     }
 }
