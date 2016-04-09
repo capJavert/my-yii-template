@@ -72,6 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['vrsta', 'id_ispostava', 'broj_sati', 'status', 'updated_at', 'created_at'], 'integer'],
             [['ime', 'prezime', 'oib', 'adresa_stanovanja', 'mjesto_stanovanja', 'broj_tel', 'mob', 'username'], 'string', 'max' => 45],
             [['spol'], 'string', 'max' => 5],
+            [['dostupan'], 'string', 'max' => 100],
             [['napomena'], 'string', 'max' => 300],
             [['auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
@@ -108,6 +109,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => 'Status',
             'updated_at' => 'Updated At',
             'created_at' => 'Created Ad',
+            'dostupan' => 'Dostupnost',
         ];
     }
 

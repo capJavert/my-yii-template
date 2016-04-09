@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -88,4 +92,51 @@ a.desc:after {
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+#scheduler {
+    .title-bar {
+        h2 {
+            padding-bottom: 20px;
+            border-bottom: 10px solid #880000;
+            width: 100%;
+        }
+    }
+
+    .box-container {
+        margin: 0 0 15px 0;
+    }
+
+    .day {
+        background: #880000;
+        color: #fff;
+        padding: 50px 0;
+        border-radius: 8px;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .day:hover {
+        background: #660000;
+    }
+
+    .day-large {
+        color: #101010;
+    }
+
+    .info-sidebar {
+        ul {
+            padding-top: 10px;
+            list-style: none;
+            padding-left: 0 !important;
+
+            li {
+                margin-bottom: 10px;
+                background: #222;
+                padding: 10px;
+                color: #fff;
+            }
+        }
+    }
 }

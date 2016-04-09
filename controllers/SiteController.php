@@ -20,7 +20,7 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'schedule', 'scheduledetail'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -97,16 +97,33 @@ class SiteController extends Controller
     }
 
     /**
-     * List workers.
+     * List schedule.
      *
      * @return mixed
      */
-    public function actionWorkers()
+    public function actionSchedule()
     {
-        $workers = User::find()->all();
+        //$workers = User::find()->all();
 
-        return $this->render('signup', [
-            'workers' => $workers,
+        return $this->render('schedule', [
+
+        ]);
+    }
+
+    /**
+     * List info for selected day.
+     *
+     * @return mixed
+     */
+    public function actionScheduledetail()
+    {
+        $dayId = Yii::$app->request->get('day');
+
+        //$workers = User::find()->all();
+
+        return $this->render('scheduleDetail', [
+            'dayId'=>$dayId,
+
         ]);
     }
 }
