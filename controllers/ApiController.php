@@ -137,7 +137,7 @@ class ApiController extends Controller
                 $user = $user->findByToken(Yii::$app->request->get('token'));
               //  $ispostava=new Ispostava();
                 //    $array["lokacija"]="nekej";
-                $model = new Userform($user->ime,$user->prezime,
+                $model = new UserForm($user->ime,$user->prezime,
                 $user->username,$user->auth_key,$user->oib,$user->dat_rod,
                 $user->adresa_stanovanja,$user->mjesto_stanovanja,$user->broj_tel,
                 $user->mob,$user->napomena,$user->getIdIspostava()->one()->lokacija,

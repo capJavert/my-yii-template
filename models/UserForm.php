@@ -9,7 +9,7 @@ use app\models\User;
 /**
  * LoginForm is the model behind the login form.
  */
-class Userform extends Model
+class UserForm extends Model
 {
     public $ime;
     public $prezime;
