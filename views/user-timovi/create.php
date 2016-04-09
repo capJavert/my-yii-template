@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersTimovi */
 
-$this->title = 'Create Users Timovi';
-$this->params['breadcrumbs'][] = ['label' => 'Users Timovis', 'url' => ['index']];
+$this->title = 'Kreiraj timove';
+$this->params['breadcrumbs'][] = ['label' => 'Timovi', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-timovi-create">

@@ -67,10 +67,7 @@ class UserTimoviController extends Controller
      */
     public function actionCreate()
     {
-        $users= User::find()->all();
-        $listUsers= ArrayHelper::map($users,'id','naziv');
-        $timovi = Timovi::find()->all();
-        $listTimovi = ArrayHelper::map($timovi, 'id_tim', 'id_tim');
+
         
         $model = new UsersTimovi();
 

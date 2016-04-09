@@ -46,8 +46,8 @@ class UsersTimovi extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_user' => 'Id User',
-            'id_tim' => 'Id Tim',
+            'id_user' => 'Korisnik',
+            'id_tim' => 'Tim',
             'dan' => 'Dan',
             'smjena'=>'Smjena'
         ];
