@@ -1,5 +1,6 @@
 package tk.codetroopers.erscheduler.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -116,5 +117,10 @@ public class BaseActivity extends AppCompatActivity implements ActivityView, Bas
     @Override
     public String getStringValue(int resId){
         return getString(resId);
+    }
+
+    @Override
+    public Context getGlobalContext() {
+        return getApplicationContext();
     }
 }

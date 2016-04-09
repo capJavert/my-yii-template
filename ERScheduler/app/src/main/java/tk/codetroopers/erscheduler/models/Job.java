@@ -22,14 +22,14 @@ public class Job extends Model implements Serializable {
         save();
     }
 
-    @Column(name = "DbUser",onDelete = Column.ForeignKeyAction.CASCADE,onUpdate = Column.ForeignKeyAction.CASCADE)
+    @Column(name = "User",onDelete = Column.ForeignKeyAction.CASCADE,onUpdate = Column.ForeignKeyAction.CASCADE)
     private User user;
 
-    @SerializedName("name")
+    @SerializedName("posao")
     @Column(name = "name")
     private String name;
 
-    @SerializedName("priority")
+    @SerializedName("prioritet")
     @Column(name = "priority")
     private boolean priority;
 

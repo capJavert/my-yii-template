@@ -6,7 +6,9 @@ import android.view.Menu;
 
 import tk.codetroopers.erscheduler.R;
 import tk.codetroopers.erscheduler.SchedulerApp;
+import tk.codetroopers.erscheduler.enums.ActivityEnum;
 import tk.codetroopers.erscheduler.enums.FragmentEnum;
+import tk.codetroopers.erscheduler.models.User;
 
 public class InitialActivity extends BaseActivity {
 
@@ -25,17 +27,15 @@ public class InitialActivity extends BaseActivity {
 
             if (savedInstanceState != null) {
                 return;
-            }/*
-            if(SaveSharedPreferences.checkSavedUser())
+            }
+            if(User.getLoggedUser() != null)
             {
-                DbUser user = DbUser.checkExistingUser(SaveSharedPreferences.getUserName(Globals.getInstance().getContext()));
-                Globals.getInstance().setDbUser(user);
+                SchedulerApp.setLoggedUser(User.getLoggedUser());
                 showActivity(ActivityEnum.MainActivity);
             }
-            else
-            {*/
+            else {
                 showFragment(FragmentEnum.LoginFragment, true);
-            //}
+            }
         }
     }
 

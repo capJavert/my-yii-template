@@ -3,12 +3,16 @@ package tk.codetroopers.erscheduler.models;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import tk.codetroopers.erscheduler.R;
+import tk.codetroopers.erscheduler.SchedulerApp;
 
 @Table(name = "Users")
 public class User extends Model implements Serializable {
@@ -94,7 +98,7 @@ public class User extends Model implements Serializable {
     @SerializedName("broj_sati")
     private Integer numberOfHours;
 
-    @SerializedName("poslovi")
+    @SerializedName("jobs")
     private List<Job> jobs;
 
     public String getName() {
@@ -226,7 +230,6 @@ public class User extends Model implements Serializable {
     public List<Job> getJobs() {
         return new Select()
                 .from(Job.class)
-                .where("DbUser = ?", this.getId())
                 .execute();
     }
 
@@ -238,5 +241,33 @@ public class User extends Model implements Serializable {
         for (Job job : jobs) {
             Job newJob = new Job(this, job.getName(), job.isPriority());
         }
+    }
+
+    public String getJobsString() {
+        String jobs = "";
+        int counter = 0;
+        String comma = ", ";
+        if(getJobs() != null) {
+            for (Job job : getJobs()) {
+                jobs += job.getName();
+                if (getJobs().size() > counter + 1)
+                    jobs += comma;
+            }
+        }
+        if(jobs == "")
+            jobs = SchedulerApp.getInstance().getContexter().getStringValue(R.string.no_jobs_error);
+        return jobs;
+    }
+
+    public static void clearUsers() {
+        new Delete().from(User.class).execute();
+        Shift.clearAllShifts();
+    }
+
+    public static User getLoggedUser() {
+        List<User> users = new Select().from(User.class).limit(1).execute();
+        if (users.isEmpty() == false)
+            return users.get(0);
+        return null;
     }
 }

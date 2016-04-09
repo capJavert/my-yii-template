@@ -3,6 +3,7 @@ package tk.codetroopers.erscheduler.models;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.google.gson.annotations.SerializedName;
 
@@ -71,5 +72,9 @@ public class Shift extends Model implements Serializable {
 
     public static List<Shift> getAllShifts() {
         return new Select().from(Shift.class).execute();
+    }
+
+    public static void clearAllShifts(){
+        new Delete().from(Shift.class).execute();
     }
 }

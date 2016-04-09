@@ -83,6 +83,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     // DbUser data is saved to application data (not Shared Preferences yet)
     private void saveUserData(String username, String password, String token) {
+        User.clearUsers();
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -91,6 +92,11 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     private void saveUserInfo(User user) {
-        SchedulerApp.setLoggedUser(user);
+        User.clearUsers();
+        User newUser = new User(user.getName(), user.getSurname(), user.getUsername(), null, user.getToken(), user.getOib(),
+                user.getBirthDate(), user.getAddress(), user.getPlace(), user.getPhoneNumber(), user.getMobileNumber(),
+                user.getRemark(), user.getCentral(), user.getNumberOfHours());
+
+        SchedulerApp.setLoggedUser(newUser);
     }
 }

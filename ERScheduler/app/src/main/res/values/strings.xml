@@ -34,4 +34,5 @@
     <string name="sync_shifts">Sinkroniziraj smjene</string>
     <string name="toolbar_app_title">ER Scheduler</string>
     <string name="login_message">Prijava u sustav</string>
+    <string name="no_jobs_error">Nema poslova</string>
 </resources>

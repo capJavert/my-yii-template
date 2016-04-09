@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id== R.id.sync_shifts) {
-            //TODO refresh from fragment
+            mViewPager.setCurrentItem(1);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -125,21 +125,26 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
         call.enqueue(new Callback<BaseReponse>() {
             @Override
             public void onResponse(Call<BaseReponse> call, Response<BaseReponse> response) {
-                if (response.body().getSuccess() != null) {
+                if (response != null && response.body() != null && response.body().getSuccess() != null) {
                     showToast(getString(R.string.logout_successful));
                     User user = SchedulerApp.getLoggedUser();
                     user.setUsername("");
                     user.setPassword("");
                     user.setToken("");
+                    User.clearUsers();
                     finish();
                 } else {
                     showToast(getString(R.string.logout_token_error));
                 }
+                User.clearUsers();
+                finish();
             }
 
             @Override
             public void onFailure(Call<BaseReponse> call, Throwable t) {
                 showToast(getString(R.string.logout_error));
+                User.clearUsers();
+                finish();
             }
         });
 

@@ -21,6 +21,7 @@ public class UserFragment extends BaseFragment {
     TextView tvPhoneNumber;
     TextView tvMobileNumber;
     TextView tvCentral;
+    TextView tvJobs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +44,7 @@ public class UserFragment extends BaseFragment {
         tvPhoneNumber= (TextView) view.findViewById(R.id.phone_number_value);
         tvMobileNumber= (TextView) view.findViewById(R.id.mobile_number_value);
         tvCentral= (TextView) view.findViewById(R.id.central_value);
+        tvJobs= (TextView) view.findViewById(R.id.jobs_value);
     }
 
     private void fillViews() {
@@ -56,5 +58,6 @@ public class UserFragment extends BaseFragment {
         tvPhoneNumber.setText(user.getPhoneNumber());
         tvMobileNumber.setText(user.getMobileNumber());
         tvCentral.setText(user.getCentral());
+        tvJobs.setText(user.getJobsString());
     }
 }
