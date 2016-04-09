@@ -10,4 +10,7 @@
     <string name="username">Korisničko ime</string>
     <string name="repeatPassword"></string>
     <string name="press_back_again_logout">Pritisnite natrag još jednom za odjavu</string>
+    <string name="logout_error">Dogodio se problem s odjavom</string>
+    <string name="logout_successful">Uspješna odjava</string>
+    <string name="logout_token_error">Dogodila se greška prilikom odjave zbog problem s korisnikom</string>
 </resources>

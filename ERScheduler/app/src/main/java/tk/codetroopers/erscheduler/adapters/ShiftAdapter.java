@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tk.codetroopers.erscheduler.R;
+import tk.codetroopers.erscheduler.SchedulerApp;
 import tk.codetroopers.erscheduler.models.Shift;
 import tk.codetroopers.erscheduler.models.TeamMate;
 
@@ -34,7 +35,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         TextView tvTeamMates = (TextView) convertView.findViewById(R.id.shiftTeamMates);
 
         String teamMates = "";
-
+        /*
         int counter = 0;
         String comma = ", ";
         for (TeamMate teamMate : shift.getTeamMates()) {
@@ -43,9 +44,15 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
                 teamMates += comma;
             counter++;
         }
+        */
+        String smjena = "";
+        if(shift.getType() == Shift.DNEVNA_SMJENA)
+            smjena = SchedulerApp.getInstance().getContexter().getStringValue(R.string.day_shift);
+        else
+            smjena = SchedulerApp.getInstance().getContexter().getStringValue(R.string.night_shift);
 
-        tvDate.setText(shift.getDate().toString());
-        tvTime.setText(shift.getDate().getTime() + "");
+        tvDate.setText("Dan " + shift.getDay() + ".");
+        tvTime.setText(smjena);
         tvCentral.setText(shift.getCentral());
         tvTeamMates.setText(teamMates);
 

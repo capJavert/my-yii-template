@@ -45,45 +45,23 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         showTitle(getString(R.string.toolbar_app_title));
+        toolbar.setNavigationIcon(R.drawable.ic_local_hospital_white_48dp);
 
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        refreshShifts();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
 
-        boolean gcmRecieved = true;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String action = bundle.getString("action");
-            if (action != null) {
-                switch (action) {
-                    case "home":
-                        //showFragment(FragmentEnum.HomeFragment, true);
-                        break;
-                    default:
-                        //showFragment(FragmentEnum.HomeFragment, true);
-                }
-            } else {
-                gcmRecieved = false;
-            }
-        } else {
-            gcmRecieved = false;
+            if(SchedulerApp.getLoggedUser() != null)
+                mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
         }
-        if (gcmRecieved == false) {
-            //showFragment(FragmentEnum.HomeFragment, true);
-        }
-
 
         startGcm();
     }
@@ -99,6 +77,8 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id== R.id.sync_shifts) {
+            SchedulerApp.isRefreshClicked = true;
+            refreshShifts();
             mViewPager.setCurrentItem(1);
             return true;
         }
@@ -127,24 +107,14 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
             public void onResponse(Call<BaseReponse> call, Response<BaseReponse> response) {
                 if (response != null && response.body() != null && response.body().getSuccess() != null) {
                     showToast(getString(R.string.logout_successful));
-                    User user = SchedulerApp.getLoggedUser();
-                    user.setUsername("");
-                    user.setPassword("");
-                    user.setToken("");
-                    User.clearUsers();
-                    finish();
                 } else {
                     showToast(getString(R.string.logout_token_error));
                 }
-                User.clearUsers();
-                finish();
             }
 
             @Override
             public void onFailure(Call<BaseReponse> call, Throwable t) {
                 showToast(getString(R.string.logout_error));
-                User.clearUsers();
-                finish();
             }
         });
 
@@ -153,6 +123,8 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
     private void doubleBackPress() {
         if (doubleBackToLogoutPressedOnce) {
             logout();
+            User.clearUsers();
+            finish();
             return;
         }
 
@@ -177,5 +149,10 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
         } else {
             Log.i("GCM: ", "Already registered. Token: " + gcmToken);
         }
+    }
+
+    private void refreshShifts(){
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 }

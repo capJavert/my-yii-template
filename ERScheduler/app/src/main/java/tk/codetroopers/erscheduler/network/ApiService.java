@@ -5,6 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import tk.codetroopers.erscheduler.models.BaseReponse;
 import tk.codetroopers.erscheduler.models.Shift;
+import tk.codetroopers.erscheduler.models.Shifts;
 import tk.codetroopers.erscheduler.models.User;
 
 public interface ApiService {
@@ -25,8 +26,10 @@ public interface ApiService {
     Call<User> getUser(@Query("modelName") String modelName,
                        @Query("token") String token);
 
-    // TODO create new response model
-    @GET("/api/get-schedule")
-    Call<Shift> getSchedule(@Query("token") String token);
+    @GET("/api/find")
+    Call<Shifts> getSchedule(@Query("modelName") String modelName,
+                            @Query("token") String token);
 
+    @GET("/api/send-token")
+    Call<BaseReponse> sendToken(@Query("token") String token);
 }

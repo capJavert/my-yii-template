@@ -21,6 +21,7 @@ public class InitialActivity extends BaseActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_local_hospital_white_48dp);
         SchedulerApp.getInstance().setContexter(this);
 
         if (findViewById(R.id.fragment_container) != null) {

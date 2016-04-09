@@ -6,7 +6,6 @@ import tk.codetroopers.erscheduler.activities.InitialActivity;
 import tk.codetroopers.erscheduler.activities.MainActivity;
 import tk.codetroopers.erscheduler.enums.ActivityEnum;
 import tk.codetroopers.erscheduler.enums.FragmentEnum;
-import tk.codetroopers.erscheduler.fragments.HomeFragment;
 import tk.codetroopers.erscheduler.fragments.LoginFragment;
 
 public class Creator {
@@ -14,7 +13,6 @@ public class Creator {
     public static Fragment getFragmentFromEnum(FragmentEnum fragmentEnum){
         switch (fragmentEnum){
             case LoginFragment: return new LoginFragment();
-            case HomeFragment: return new HomeFragment();
             default: return new LoginFragment();
         }
     }

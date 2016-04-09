@@ -12,6 +12,10 @@ import tk.codetroopers.erscheduler.fragments.UserFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+    public static final int USER_INFO = 0;
+    public static final int SHIFTS_LIST = 1;
+    public static final int HISTORY_OF_SHIFTS = 2;
+
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -19,11 +23,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
+            case USER_INFO:
                 return new UserFragment();
-            case 1:
+            case SHIFTS_LIST:
                 return new ShiftsFragment();
-            case 2:
+            case HISTORY_OF_SHIFTS:
                 return new HistoryFragment();
             default:
                 return new ShiftsFragment();
@@ -38,11 +42,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
+            case USER_INFO:
                 return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_user);
-            case 1:
+            case SHIFTS_LIST:
                 return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_shifts);
-            case 2:
+            case HISTORY_OF_SHIFTS:
                 return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_history);
         }
         return null;

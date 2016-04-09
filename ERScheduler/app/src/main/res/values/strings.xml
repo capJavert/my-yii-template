@@ -35,4 +35,10 @@
     <string name="toolbar_app_title">ER Scheduler</string>
     <string name="login_message">Prijava u sustav</string>
     <string name="no_jobs_error">Nema poslova</string>
+    <string name="no_shift_message">Trenutno nema ni jedne definirane smjene</string>
+    <string name="no_shift_history_message">Nema ni jedne smjene spremljene u povijesti</string>
+    <string name="shifts_refreshed">Smjene osvježene</string>
+    <string name="shifts_refresh_failure">Nije uspjelo osvježavanje smjena</string>
+    <string name="day_shift">Dnevna smjena (08h-20h)</string>
+    <string name="night_shift">Noćna smjena (20h-08h)</string>
 </resources>

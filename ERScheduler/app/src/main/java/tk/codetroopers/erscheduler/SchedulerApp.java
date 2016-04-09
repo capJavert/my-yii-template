@@ -56,4 +56,6 @@ public class SchedulerApp {
     public void setContexter(Contexter contexter) {
         this.contexter = contexter;
     }
+
+    public static boolean isRefreshClicked = false;
 }

@@ -18,6 +18,8 @@ import tk.codetroopers.erscheduler.network.ApiService;
 
 public class LoginInteractorImpl implements LoginInteractor {
 
+    private final static String MODEL_NAME_USER_INFO = "User";
+
     @Override
     public void login(final String username, final String password, final ExtraListener listener) {
 
@@ -56,7 +58,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     @Override
     public void getUserData(final Listener listener, User user) {
         ApiService apiService = ApiModule.createService(ApiService.class);
-        Call<User> call = apiService.getUser("User", user.getToken());
+        Call<User> call = apiService.getUser(MODEL_NAME_USER_INFO, user.getToken());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

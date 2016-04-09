@@ -17,7 +17,6 @@ import tk.codetroopers.erscheduler.enums.ActivityEnum;
 import tk.codetroopers.erscheduler.enums.AppStateEnum;
 import tk.codetroopers.erscheduler.enums.FragmentEnum;
 import tk.codetroopers.erscheduler.fragments.BaseFragment;
-import tk.codetroopers.erscheduler.fragments.HomeFragment;
 import tk.codetroopers.erscheduler.helpers.Contexter;
 import tk.codetroopers.erscheduler.helpers.Creator;
 import tk.codetroopers.erscheduler.mvp.view.ActivityView;
@@ -60,7 +59,7 @@ public class BaseActivity extends AppCompatActivity implements ActivityView, Bas
         Fragment fragment = Creator.getFragmentFromEnum(fragmentEnum);
 
         if (fragment != null) {
-            if(fragment.getClass() == HomeFragment.class && appStateEnum == AppStateEnum.SignedIn)
+            if(appStateEnum == AppStateEnum.SignedIn)
                 return;
 
             fragment.setArguments(getIntent().getExtras());
