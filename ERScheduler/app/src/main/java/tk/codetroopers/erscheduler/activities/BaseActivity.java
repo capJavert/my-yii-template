@@ -17,10 +17,11 @@ import tk.codetroopers.erscheduler.enums.AppStateEnum;
 import tk.codetroopers.erscheduler.enums.FragmentEnum;
 import tk.codetroopers.erscheduler.fragments.BaseFragment;
 import tk.codetroopers.erscheduler.fragments.HomeFragment;
+import tk.codetroopers.erscheduler.helpers.Contexter;
 import tk.codetroopers.erscheduler.helpers.Creator;
 import tk.codetroopers.erscheduler.mvp.view.ActivityView;
 
-public class BaseActivity extends AppCompatActivity implements ActivityView, BaseFragment.OnFragmentInteractionListener {
+public class BaseActivity extends AppCompatActivity implements ActivityView, BaseFragment.OnFragmentInteractionListener, Contexter {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,6 @@ public class BaseActivity extends AppCompatActivity implements ActivityView, Bas
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -114,5 +112,9 @@ public class BaseActivity extends AppCompatActivity implements ActivityView, Bas
         for (int i = 1 + levelsIgnored; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
             getSupportFragmentManager().popBackStack();
         }
+    }
+    @Override
+    public String getStringValue(int resId){
+        return getString(resId);
     }
 }

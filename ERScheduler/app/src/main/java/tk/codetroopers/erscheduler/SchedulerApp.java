@@ -1,9 +1,11 @@
 package tk.codetroopers.erscheduler;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import tk.codetroopers.erscheduler.enums.AppStateEnum;
+import tk.codetroopers.erscheduler.helpers.Contexter;
 import tk.codetroopers.erscheduler.models.User;
 
 public class SchedulerApp {
@@ -11,6 +13,7 @@ public class SchedulerApp {
     protected static SchedulerApp instance;
     protected static AppStateEnum appState;
     protected static User loggedUser;
+    protected Contexter contexter;
 
     private SchedulerApp() {
 
@@ -44,5 +47,13 @@ public class SchedulerApp {
 
     public static void setLoggedUser(User loggedUser) {
         SchedulerApp.loggedUser = loggedUser;
+    }
+
+    public Contexter getContexter() {
+        return contexter;
+    }
+
+    public void setContexter(Contexter contexter) {
+        this.contexter = contexter;
     }
 }

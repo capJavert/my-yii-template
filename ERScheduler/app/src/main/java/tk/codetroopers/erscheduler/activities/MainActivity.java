@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -14,64 +16,72 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tk.codetroopers.erscheduler.R;
 import tk.codetroopers.erscheduler.SchedulerApp;
+import tk.codetroopers.erscheduler.adapters.SectionsPagerAdapter;
 import tk.codetroopers.erscheduler.enums.ActivityEnum;
-import tk.codetroopers.erscheduler.enums.FragmentEnum;
 import tk.codetroopers.erscheduler.gcm.GcmRegistrationIntentService;
 import tk.codetroopers.erscheduler.models.BaseReponse;
 import tk.codetroopers.erscheduler.models.User;
+import tk.codetroopers.erscheduler.mvp.view.ActivityView;
 import tk.codetroopers.erscheduler.mvp.view.MainView;
 import tk.codetroopers.erscheduler.network.ApiModule;
 import tk.codetroopers.erscheduler.network.ApiService;
 
-public class MainActivity extends BaseActivity implements MainView {
-
-    //private Toolbar toolbar;
+public class MainActivity extends BaseActivity implements MainView, ActivityView {
 
     boolean doubleBackToLogoutPressedOnce = false;
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SchedulerApp.getInstance().setContexter(this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        showTitle(SchedulerApp.getLoggedUser().getUsername());
 
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        if (findViewById(R.id.fragment_container) != null) {
-            if (savedInstanceState != null)
-                return;
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-            boolean gcmRecieved = true;
-            Bundle bundle = getIntent().getExtras();
-            if (bundle != null) {
-                String action = bundle.getString("action");
-                if (action != null) {
-                    switch (action) {
-                        case "home":
-                            showFragment(FragmentEnum.HomeFragment, true);
-                            break;
-                        default:
-                            showFragment(FragmentEnum.HomeFragment, true);
-                    }
-                } else {
-                    gcmRecieved = false;
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        boolean gcmRecieved = true;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String action = bundle.getString("action");
+            if (action != null) {
+                switch (action) {
+                    case "home":
+                        //showFragment(FragmentEnum.HomeFragment, true);
+                        break;
+                    default:
+                        //showFragment(FragmentEnum.HomeFragment, true);
                 }
             } else {
                 gcmRecieved = false;
             }
-            if (gcmRecieved == false) {
-                showFragment(FragmentEnum.HomeFragment, true);
-            }
+        } else {
+            gcmRecieved = false;
+        }
+        if (gcmRecieved == false) {
+            //showFragment(FragmentEnum.HomeFragment, true);
         }
 
+
         startGcm();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        //getMenuInflater().inflate(R.menu.menu_initial, menu);
-        return true;
     }
 
     @Override

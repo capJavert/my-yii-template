@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tk.codetroopers.erscheduler">
 
@@ -5,20 +6,26 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="23" />
 
-    <uses-permission android:name="android.permission.INTERNET" /><uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <permission android:name="ml.pumpking.pumpkin.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+
+    <permission
+        android:name="tk.codetroopers.erscheduler.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:name="com.activeandroid.app.Application">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA3iOG_851NE6Fvb2Lt9OwfHt6w73C0PZA" />
+        <meta-data android:name="AA_DB_NAME" android:value="scheduler.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="6" />
 
         <activity
             android:name=".activities.InitialActivity"
@@ -39,7 +46,6 @@
         <service
             android:name=".gcm.GcmRegistrationIntentService"
             android:exported="false" />
-
         <service
             android:name=".gcm.InstanceListenerService"
             android:enabled="false">
@@ -54,7 +60,8 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="ml.pumpking.pumkin" />
+
+                <category android:name="tk.codetroopers.erscheduler" />
             </intent-filter>
         </receiver>
 
@@ -65,6 +72,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

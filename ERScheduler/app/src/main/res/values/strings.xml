@@ -18,7 +18,16 @@
     <string name="logout_successful">Logout succcesful.</string>
     <string name="logout_token_error">Error with token for logout.</string>
     <string name="logout_error">Error with logout.</string>
-    <string name="gcm_sender_id">136279074754</string>
-    <string name="base_fragment_title">Base Fragment</string>
+    <string name="gcm_sender_id">898217512099</string>
     <!-- Project number -->
+    <string name="base_fragment_title">Base Fragment</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_shifts">Dodjeljene smjene</string>
+    <string name="tab_history">Povijest</string>
+    <string name="shift_item_name">One Shift</string>
+    <string name="shift_date">Date of dbShift</string>
+    <string name="shift_time">Shift time</string>
+    <string name="shift_central">Central</string>
+    <string name="shift_team_mates">Team mate 1, team mate 2</string>
 </resources>

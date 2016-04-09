@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import tk.codetroopers.erscheduler.R;
+import tk.codetroopers.erscheduler.SchedulerApp;
 import tk.codetroopers.erscheduler.enums.FragmentEnum;
 
 public class InitialActivity extends BaseActivity {
@@ -18,6 +19,7 @@ public class InitialActivity extends BaseActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SchedulerApp.getInstance().setContexter(this);
 
         if (findViewById(R.id.fragment_container) != null) {
 
@@ -26,8 +28,8 @@ public class InitialActivity extends BaseActivity {
             }/*
             if(SaveSharedPreferences.checkSavedUser())
             {
-                User user = User.checkExistingUser(SaveSharedPreferences.getUserName(Globals.getInstance().getContext()));
-                Globals.getInstance().setUser(user);
+                DbUser user = DbUser.checkExistingUser(SaveSharedPreferences.getUserName(Globals.getInstance().getContext()));
+                Globals.getInstance().setDbUser(user);
                 showActivity(ActivityEnum.MainActivity);
             }
             else

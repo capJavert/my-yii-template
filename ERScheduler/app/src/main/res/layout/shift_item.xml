@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="104dp">
+
+    <LinearLayout
+        android:id="@+id/shift_item_layout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:id="@+id/shiftDate"
+            android:layout_marginRight="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray"
+            android:paddingRight="16dp"
+            android:text="@string/shift_date"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shiftTime"
+            android:layout_marginRight="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_gray"
+            android:paddingRight="16dp"
+            android:text="@string/shift_time"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shiftCentral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text"
+            android:text="@string/shift_central"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:id="@+id/shiftTeamMates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text"
+            android:text="@string/shift_team_mates"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="40dp"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

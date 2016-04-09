@@ -48,7 +48,7 @@ public class LoginInteractorImpl implements LoginInteractor {
         });
     }
 
-    // User data is saved to application data (not Shared Preferences yet)
+    // DbUser data is saved to application data (not Shared Preferences yet)
     private void saveUserData(String username, String password, String token) {
         User user = new User();
         user.setUsername(username);
