@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<i class="fa fa-list-alt"></i> ErrScheduler',
+        'brandLabel' => '<img class="logo" src="/images/logo_scheduler.png" alt="logo" /> ErrScheduler',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

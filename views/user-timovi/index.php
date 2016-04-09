@@ -22,7 +22,16 @@ $this->title = 'Korisnici smjena';
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'id_user',
+            [
+                'attribute' => 'id_user',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $user = \app\models\User::findOne($model->id_user);
+                    $value = $user->ime.' '.$user->prezime;
+
+                    return $value;
+                },
+            ],
             'id_tim',
             'dan',
             'smjena',
