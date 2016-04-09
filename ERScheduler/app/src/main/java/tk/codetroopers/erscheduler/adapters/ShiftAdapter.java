@@ -29,6 +29,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         }
 
         TextView tvDate = (TextView) convertView.findViewById(R.id.shiftDate);
+        TextView tvTime = (TextView) convertView.findViewById(R.id.shiftTime);
         TextView tvCentral = (TextView) convertView.findViewById(R.id.shiftCentral);
         TextView tvTeamMates = (TextView) convertView.findViewById(R.id.shiftTeamMates);
 
@@ -44,6 +45,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         }
 
         tvDate.setText(shift.getDate().toString());
+        tvTime.setText(shift.getDate().getTime() + "");
         tvCentral.setText(shift.getCentral());
         tvTeamMates.setText(teamMates);
 

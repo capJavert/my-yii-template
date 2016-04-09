@@ -1,23 +1,162 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView2" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView" />
-</TableLayout>
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ime:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Imenko"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/surname_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Prezime:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/surname_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezimenko"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/oib_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="OIB:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/oib_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OIB broj"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/birth_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Datum rođenja:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/birth_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datum rođenja datum"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Adresa:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/address_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresa stanovanja"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/place_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Mjesto:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/place_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mjesto stanovanja"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+
+        <TextView
+            android:id="@+id/phone_number_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Broj telefona:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/phone_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Broj telefona ovdje"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/mobile_number_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Broj mobitela:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/mobile_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Broj mobitela ovdje"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text" />
+
+        <TextView
+            android:id="@+id/central_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Matična ispostava:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/central_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ispostava ovdje"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text"
+            android:layout_marginBottom="70dp" />
+    </LinearLayout>
+
+
+</ScrollView>

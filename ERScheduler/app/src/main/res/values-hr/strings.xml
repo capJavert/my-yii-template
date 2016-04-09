@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ER Scheduler</string>
+    <string name="btn_login">Prijava</string>
+    <string name="empty_login">Molimo unesite korisničko ime i lozinku</string>
+    <string name="login_error">Neispravno korisničko ime i/ili lozinka </string>
+    <string name="login_in_progress">Molimo pričekajte, prijava je u tijeku...</string>
+    <string name="no_spaces_allowed">Korisničko ime i lozinka ne smiju sadržavati razmake</string>
+    <string name="password">Lozinka</string>
+    <string name="username">Korisničko ime</string>
+    <string name="repeatPassword"></string>
+    <string name="press_back_again_logout">Pritisnite natrag još jednom za odjavu</string>
+</resources>

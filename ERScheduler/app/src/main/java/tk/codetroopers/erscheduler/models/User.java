@@ -18,7 +18,7 @@ public class User extends Model implements Serializable {
     }
 
     public User(String name, String surname, String username, String password, String token, String oib,
-                Date birthDate, String address, String place, String phoneNumber, String mobileNumber,
+                String birthDate, String address, String place, String phoneNumber, String mobileNumber,
                 String remark, String central, Integer numberOfHours) {
         super();
         this.name = name;
@@ -64,7 +64,7 @@ public class User extends Model implements Serializable {
 
     @Column(name = "birthDate")
     @SerializedName("dat_rod")
-    private Date birthDate;
+    private String birthDate;
 
     @Column(name = "address")
     @SerializedName("adresa_stanovanja")
@@ -151,11 +151,11 @@ public class User extends Model implements Serializable {
         save();
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
         save();
     }

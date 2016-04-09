@@ -9,6 +9,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -42,7 +44,7 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        showTitle(SchedulerApp.getLoggedUser().getUsername());
+        showTitle(getString(R.string.toolbar_app_title));
 
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -57,6 +59,8 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.setCurrentItem(1);
 
         boolean gcmRecieved = true;
         Bundle bundle = getIntent().getExtras();
@@ -82,6 +86,23 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
 
 
         startGcm();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id== R.id.sync_shifts) {
+            //TODO refresh from fragment
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

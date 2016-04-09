@@ -3,6 +3,7 @@ package tk.codetroopers.erscheduler.mvp.presenter.impl;
 import tk.codetroopers.erscheduler.SchedulerApp;
 import tk.codetroopers.erscheduler.enums.AppStateEnum;
 import tk.codetroopers.erscheduler.listeners.ExtraListener;
+import tk.codetroopers.erscheduler.listeners.Listener;
 import tk.codetroopers.erscheduler.mvp.interactor.LoginInteractor;
 import tk.codetroopers.erscheduler.mvp.interactor.impl.LoginInteractorImpl;
 import tk.codetroopers.erscheduler.mvp.presenter.LoginPresenter;
@@ -29,11 +30,15 @@ public class LoginPresenterImpl implements LoginPresenter {
         }
     }
 
+    private void getUserData(){
+        interactor.getUserData(userInfoListener, SchedulerApp.getLoggedUser());
+    }
+
     private ExtraListener loginListener = new ExtraListener() {
         @Override
         public void onSuccess() {
             SchedulerApp.getInstance().setAppState(AppStateEnum.LoggingIn);
-            view.navigateToMain();
+            getUserData();
         }
 
         @Override
@@ -46,6 +51,18 @@ public class LoginPresenterImpl implements LoginPresenter {
         public void onFailure(String error) {
             SchedulerApp.getInstance().setAppState(AppStateEnum.NotSignedIn);
             view.showError(error);
+        }
+    };
+
+    private Listener userInfoListener = new Listener() {
+        @Override
+        public void onSuccess() {
+            view.navigateToMain();
+        }
+
+        @Override
+        public void onFailure() {
+            view.showBadCredentials();
         }
     };
 }

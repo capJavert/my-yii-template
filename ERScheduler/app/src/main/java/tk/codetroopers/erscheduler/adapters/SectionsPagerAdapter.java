@@ -8,6 +8,7 @@ import tk.codetroopers.erscheduler.R;
 import tk.codetroopers.erscheduler.SchedulerApp;
 import tk.codetroopers.erscheduler.fragments.HistoryFragment;
 import tk.codetroopers.erscheduler.fragments.ShiftsFragment;
+import tk.codetroopers.erscheduler.fragments.UserFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -19,8 +20,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ShiftsFragment();
+                return new UserFragment();
             case 1:
+                return new ShiftsFragment();
+            case 2:
                 return new HistoryFragment();
             default:
                 return new ShiftsFragment();
@@ -29,15 +32,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_shifts);
+                return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_user);
             case 1:
+                return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_shifts);
+            case 2:
                 return SchedulerApp.getInstance().getContexter().getStringValue(R.string.tab_history);
         }
         return null;

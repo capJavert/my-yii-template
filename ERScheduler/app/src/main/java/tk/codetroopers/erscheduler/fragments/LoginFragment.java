@@ -42,7 +42,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
         TVMessage = (TextView) viewInflater.findViewById(R.id.TVMessage);
         TVMessage.setText("");
 
-        ((ActivityView) getContext()).showTitle(getContext().getString(R.string.login_fragment_title));
+        ((ActivityView) getContext()).showTitle(getContext().getString(R.string.toolbar_app_title));
         SchedulerApp.getInstance().setAppState(AppStateEnum.NotSignedIn);
 
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
@@ -50,8 +50,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
             btnLogin.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
         }
         //TEST
-        ETusername.setText("mtudjan");
-        ETpassword.setText("nijelozinka");
+        ETusername.setText("admin");
+        ETpassword.setText("admin");
 
         setupParent(viewInflater);
         initilizeEvents();
