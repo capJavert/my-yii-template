@@ -32,7 +32,7 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $updated_at
  * @property integer $created_at
- *
+ * @property string $dostupan
  * @property Ispostava $idIspostava
  * @property UsersPoslovi[] $usersPoslovis
  * @property Poslovi[] $idPosaos

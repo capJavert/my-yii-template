@@ -104,6 +104,10 @@ class LogicController extends \yii\web\Controller
                 echo $rad[0];
                 $radnik->spol = "m";
                 $radnik->dat_rod = "1994-09-20";
+                $repl= array('"','\r');
+                echo str_replace($repl, "", $rad[2]);
+
+                $radnik->dostupan= str_replace($repl, "", $rad[2]);
                 //  var_dump($rad[0]);
 
                 if ($radnik->validate()) {
@@ -120,6 +124,7 @@ class LogicController extends \yii\web\Controller
 
 
                 $characters = str_split($rad[1]);
+
 
                 for ($j = 0; $j < sizeof($characters); $j++) {
                     echo $characters[$j] . " ";
