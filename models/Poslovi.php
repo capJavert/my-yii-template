@@ -57,6 +57,6 @@ class Poslovi extends \yii\db\ActiveRecord
      */
     public function getIdUsers()
     {
-        return $this->hasMany(User::className(), ['id_user' => 'id_user'])->viaTable('users_poslovi', ['id_posao' => 'id_posao']);
+        return $this->hasMany(User::className(), ['id' => 'id_user'])->viaTable('users_poslovi', ['id_posao' => 'id_posao']);
     }
 }

@@ -33,7 +33,7 @@ class UsersPoslovi extends \yii\db\ActiveRecord
             [['id_user', 'id_posao'], 'required'],
             [['id_user', 'id_posao', 'prioritet'], 'integer'],
             [['id_posao'], 'exist', 'skipOnError' => true, 'targetClass' => Poslovi::className(), 'targetAttribute' => ['id_posao' => 'id_posao']],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
 
