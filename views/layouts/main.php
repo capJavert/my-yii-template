@@ -33,24 +33,26 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
+
+    if(Yii::$app->user->isGuest) {
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Prijava', 'url' => ['/site/login']]
+            ],
+        ]);
+        NavBar::end();
+    } else {
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Raspored', 'url' => ['/site/schedule']],
+                ['label' => 'Djelatnici', 'url' => ['/user/index']],
+                ['label' => 'Odjava', 'url' => ['/site/logout']]
+            ],
+        ]);
+        NavBar::end();
+    }
     ?>
 
     <div class="container">

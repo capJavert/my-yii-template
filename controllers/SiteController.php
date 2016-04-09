@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\User;
 use app\models\LoginForm;
 use app\models\SignupForm;
 
@@ -28,7 +29,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    //'logout' => ['post'],
                 ],
             ],
         ];
@@ -92,6 +93,20 @@ class SiteController extends Controller
 
         return $this->render('signup', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * List workers.
+     *
+     * @return mixed
+     */
+    public function actionWorkers()
+    {
+        $workers = User::find()->all();
+
+        return $this->render('signup', [
+            'workers' => $workers,
         ]);
     }
 }

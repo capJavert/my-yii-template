@@ -1,25 +1,42 @@
 <?php
+
 namespace app\models;
 
 use Yii;
-use yii\base\NotSupportedException;
+
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
  * @property integer $id
+ * @property string $ime
+ * @property string $prezime
+ * @property string $oib
+ * @property string $dat_rod
+ * @property string $spol
+ * @property string $adresa_stanovanja
+ * @property string $mjesto_stanovanja
+ * @property string $broj_tel
+ * @property string $mob
+ * @property string $napomena
+ * @property integer $vrsta
+ * @property integer $id_ispostava
+ * @property integer $broj_sati
  * @property string $username
+ * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
  * @property integer $status
- * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property integer $created_at
+ *
+ * @property Ispostava $idIspostava
+ * @property UsersPoslovi[] $usersPoslovis
+ * @property Poslovi[] $idPosaos
+ * @property UsersTimovi[] $usersTimovis
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -31,7 +48,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -50,9 +67,80 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['ime', 'prezime', 'oib', 'dat_rod'], 'required'],
+            [['dat_rod'], 'safe'],
+            [['vrsta', 'id_ispostava', 'broj_sati', 'status', 'updated_at', 'created_at'], 'integer'],
+            [['ime', 'prezime', 'oib', 'adresa_stanovanja', 'mjesto_stanovanja', 'broj_tel', 'mob', 'username'], 'string', 'max' => 45],
+            [['spol'], 'string', 'max' => 5],
+            [['napomena'], 'string', 'max' => 300],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['id_ispostava'], 'exist', 'skipOnError' => true, 'targetClass' => Ispostava::className(), 'targetAttribute' => ['id_ispostava' => 'id_ispostava']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'ime' => 'Ime',
+            'prezime' => 'Prezime',
+            'oib' => 'Oib',
+            'dat_rod' => 'Dat Rod',
+            'spol' => 'Spol',
+            'adresa_stanovanja' => 'Adresa Stanovanja',
+            'mjesto_stanovanja' => 'Mjesto Stanovanja',
+            'broj_tel' => 'Broj Tel',
+            'mob' => 'Mob',
+            'napomena' => 'Napomena',
+            'vrsta' => 'Vrsta',
+            'id_ispostava' => 'Id Ispostava',
+            'broj_sati' => 'Broj Sati',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password',
+            'password_reset_token' => 'Password Reset Token',
+            'status' => 'Status',
+            'updated_at' => 'Updated At',
+            'created_at' => 'Created Ad',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdIspostava()
+    {
+        return $this->hasOne(Ispostava::className(), ['id_ispostava' => 'id_ispostava']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersPoslovis()
+    {
+        return $this->hasMany(UsersPoslovi::className(), ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdPosaos()
+    {
+        return $this->hasMany(Poslovi::className(), ['id_posao' => 'id_posao'])->viaTable('users_poslovi', ['id_user' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsersTimovis()
+    {
+        return $this->hasMany(UsersTimovi::className(), ['id_user' => 'id']);
     }
 
     /**
