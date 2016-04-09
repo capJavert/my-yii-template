@@ -3,7 +3,11 @@
 namespace app\controllers;
 
 use app\models\File;
+use app\models\Ispostava;
+use app\models\Poslovi;
 use app\models\User;
+use app\models\Userform;
+use app\models\UsersPoslovi;
 use app\models\UsersTimovi;
 use Yii;
 use yii\filters\AccessControl;
@@ -131,7 +135,26 @@ class ApiController extends Controller
             case 'User':
                 $user = new User();
                 $user = $user->findByToken(Yii::$app->request->get('token'));
-                return BaseJson::encode($user);
+              //  $ispostava=new Ispostava();
+                $ispostava= Ispostava::find()->where(["id_ispostava" => $user->id_ispostava])->one();
+                $user->lokacija=$ispostava->lokacija;
+            //    $array["lokacija"]="nekej";
+                $user->getIdIspostava();
+                $model = new Userform($user->ime,$user->prezime,
+                $user->username,$user->auth_key,$user->oib,$user->dat_rod,
+                $user->adresa_stanovanja,$user->mjesto_stanovanja,$user->broj_tel,
+                $user->mob,$user->napomena,$user->getIdIspostava()->one()->lokacija,
+            $user->broj_sati);
+                foreach($user->getUsersPoslovis()->all() as $poslovi)
+                {
+                    $posao=Poslovi::find()->where(["id_posao"=>$poslovi->id_posao])->one();
+                    $temp["posao"]=$posao->naziv;
+                    $temp["prioritet"]=$poslovi->prioritet;
+                    array_push($model->jobs,$temp);
+
+                }
+               
+                return BaseJson::encode($model);
                 break;
 
                 /*
@@ -147,20 +170,24 @@ class ApiController extends Controller
             case 'Shift':
                 $user = new User();
                 $user = $user->findByToken(Yii::$app->request->get('token'));
-                $userTimovi= UsersTimovi::find()->where(['id_user' => $user->getId()])->all();
-                $users= array();
-                foreach($userTimovi as $userTim)
-                {
-                    array_push($users,User::find()->where(['id' => $userTim->id_user]));
-                }
-
-                return BaseJson::encode([$userTimovi,$users]);
+             //  return BaseJson::encode([$userTimovi,$users]);
                 break;
+            case 'poslovi':
+                $user = new User();
+                $user = $user->findByToken(Yii::$app->request->get('token'));
+                $user_poslovi= UsersPoslovi::find()->where(["id_user" => $user->id])->all();
+                foreach($user_poslovi as $user_posao)
+                {
+              //      $Posao=
+                }
+                return BaseJson::encode($user_poslovi);
+                break;
+
 
             default: return BaseJson::encode(['errors'=>'ERROR_INVALID_MODEL_NAME']);
         }
 
-        return BaseJson::encode($data);
+   //     return BaseJson::encode($data);
     }
 
     public function actionTestgcm() {
