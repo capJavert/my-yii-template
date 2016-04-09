@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\File;
 use app\models\User;
+use app\models\UsersTimovi;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -124,10 +125,16 @@ class ApiController extends Controller
         if(!$this->authentication())
             return BaseJson::encode(['errors'=>'ERROR_AUTH_FAILED']);
 
-        $name = Yii::$app->request->get('modelName').'s';
+        $name = Yii::$app->request->get('modelName');
 
         switch(Yii::$app->request->get('modelName')) {
             case 'User':
+                $user = new User();
+                $user = $user->findByToken(Yii::$app->request->get('token'));
+                return BaseJson::encode($user);
+                break;
+
+                /*
                 $models = User::find()->all();
 
                 $data = [];
@@ -136,6 +143,20 @@ class ApiController extends Controller
 
                 //var_dump($data) or die;
                 break;
+                */
+            case 'Shift':
+                $user = new User();
+                $user = $user->findByToken(Yii::$app->request->get('token'));
+                $userTimovi= UsersTimovi::find()->where(['id_user' => $user->getId()])->all();
+                $users= array();
+                foreach($userTimovi as $userTim)
+                {
+                    array_push($users,User::find()->where(['id' => $userTim->id_user]));
+                }
+
+                return BaseJson::encode([$userTimovi,$users]);
+                break;
+
             default: return BaseJson::encode(['errors'=>'ERROR_INVALID_MODEL_NAME']);
         }
 
