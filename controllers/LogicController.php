@@ -157,11 +157,8 @@ class LogicController extends \yii\web\Controller
         $this->temp++;
     }
 
-    public function theAlgorithm($max, $users=null, $timovi=null, $step=0, $day=0) {
-        if($users==null)
-            $users = User::find()->where('id>2')->orderBy('broj_sati')->all();
-
-        echo $step.':'.count($users).'<br /><br />-----------------------';
+    public function theAlgorithm($max, $users=null, $timovi=null, $quota, $day=0) {
+        $users = User::find()->where('id>2')->orderBy('broj_sati')->all();
 
         //only available users
         foreach($users as $k => $user) {
@@ -169,48 +166,62 @@ class LogicController extends \yii\web\Controller
                 unset($users[$k]);
         }
 
-        if($timovi==null)
+        //for($i=1;$i<=3;$i++) {
+        //    echo $i.':'.count($users).'<br /><br />-----------------------';
+
             $timovi = Timovi::find()->all();
 
-        foreach($timovi as $tk => $tim) {
-            $job = $tim->getNextJob();
+            $currentQuouta = 0;
+            foreach($timovi as $tk => $tim) {
+                if($currentQuouta>$quota)
+                    break;
 
-            foreach($users as $k => $user) {
-                if($user->checkAdd($job, $step)) {
-                    $UT = new UsersTimovi();
-                    $UT->dan = $day;
-                    $UT->id_tim = $tim->id_tim;
-                    $UT->id_user = $user->id;
-                    $UT->smjena = 1;
-                    $UT->posao = $job;
+                $job = $tim->getNextJob();
 
-                    echo $tim->id_tim.'-'.$user->id.'-'.$day.'<br />';
+                $steps = 1;
+                while($tim->getNextJob()!='' && $steps<4) {
+                    foreach ($users as $k => $user) {
+                        if ($user->checkAdd($job, $steps, $day)) {
+                            $UT = new UsersTimovi();
+                            $UT->dan = $day;
+                            $UT->id_tim = $tim->id_tim;
+                            $UT->id_user = $user->id;
+                            $UT->smjena = 1;
+                            $UT->posao = $job;
 
-                    if(!UsersTimovi::find()->where([
-                            'id_tim'=>$tim->id_tim,
-                            'id_user'=>$user->id,
-                            'dan'=>$day
-                        ]
-                    )->all())
-                        $UT->save();
+                            echo $tim->id_tim . '-' . $user->id . '-' . $day . '<br />';
+
+                            if (!UsersTimovi::find()->where([
+                                    'id_tim' => $tim->id_tim,
+                                    'id_user' => $user->id,
+                                    'dan' => $day
+                                ]
+                            )->one()
+                            ) {
+                                $UT->save();
+                                $user->broj_sati_ukupno += 12;
+                                $user->save();
+                            }
+
+                            $currentQuouta++;
+                            unset($users[$k]);
+                            break;
+                        }
+                    }
+                $steps++;
                 }
             }
-
-            if($tim->getNextJob()=='')
-                unset($timovi[$tk]);
-
-        }
+        //}
 
         //if($timovi!=null && empty($timovi))
-        //$day++;
+        $day++;
 
-        $step++;
-
-
-        if($step>4)
+        if($day==$max) {
             echo 'finish';
-        else
-            $this->theAlgorithm($max, $users, $timovi, $step, $day);
+
+            return 0;
+        } else
+            $this->theAlgorithm($max, null, null, $quota, $day);
     }
 
     public function actionAssign() {
@@ -218,7 +229,15 @@ class LogicController extends \yii\web\Controller
 
         $daysNum = $datoteka->broj_tjedana*7;
 
-        $this->theAlgorithm($max=$daysNum, $users=[], $timovi=[], $step=0, $day=0);
+        $quota = 0;
+        foreach(Timovi::find()->all() as $t) {
+            if($t->vrsta)
+                $quota+=4;
+            else
+                $quota+=2;
+        }
+
+        $this->theAlgorithm($max=$daysNum, $users=[], $timovi=[], $quota, $day=0);
     }
 
 

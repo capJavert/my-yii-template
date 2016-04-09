@@ -298,10 +298,15 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
     }
 
-    public function checkAdd($job, $step) {
+    public function checkAdd($job, $step, $day) {
         $add = true;
 
         $poslovi = UsersPoslovi::find()->where('id_user='.$this->id)->all();
+
+        if(!($day%7)) {
+            $this->broj_sati = 0;
+            $this->save();
+        }
 
         if($this->broj_sati>=50)
             $add = false;
