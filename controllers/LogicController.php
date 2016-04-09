@@ -8,6 +8,7 @@ use app\models\Poslovi;
 use app\models\Timovi;
 use app\models\User;
 use app\models\UsersPoslovi;
+use app\models\UsersTimovi;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -156,7 +157,69 @@ class LogicController extends \yii\web\Controller
         $this->temp++;
     }
 
+    public function theAlgorithm($max, $users=null, $timovi=null, $step=0, $day=0) {
+        if($users==null)
+            $users = User::find()->where('id>2')->orderBy('broj_sati')->all();
 
+        echo $step.':'.count($users).'<br /><br />-----------------------';
+
+        //only available users
+        foreach($users as $k => $user) {
+            if(!$user->available($day))
+                unset($users[$k]);
+        }
+
+        if($timovi==null)
+            $timovi = Timovi::find()->all();
+
+        foreach($timovi as $tk => $tim) {
+            $job = $tim->getNextJob();
+
+            foreach($users as $k => $user) {
+                if($user->checkAdd($job, $step)) {
+                    $UT = new UsersTimovi();
+                    $UT->dan = $day;
+                    $UT->id_tim = $tim->id_tim;
+                    $UT->id_user = $user->id;
+                    $UT->smjena = 1;
+                    $UT->posao = $job;
+
+                    echo $tim->id_tim.'-'.$user->id.'-'.$day.'<br />';
+
+                    if(!UsersTimovi::find()->where([
+                            'id_tim'=>$tim->id_tim,
+                            'id_user'=>$user->id,
+                            'dan'=>$day
+                        ]
+                    )->all())
+                        $UT->save();
+                }
+            }
+
+            if($tim->getNextJob()=='')
+                unset($timovi[$tk]);
+
+        }
+
+        //if($timovi!=null && empty($timovi))
+        //$day++;
+
+        $step++;
+
+
+        if($step>4)
+            echo 'finish';
+        else
+            $this->theAlgorithm($max, $users, $timovi, $step, $day);
+    }
+
+    public function actionAssign() {
+        $datoteka = end(Datoteka::find()->all());
+
+        $daysNum = $datoteka->broj_tjedana*7;
+
+        $this->theAlgorithm($max=$daysNum, $users=[], $timovi=[], $step=0, $day=0);
+    }
 
 
 

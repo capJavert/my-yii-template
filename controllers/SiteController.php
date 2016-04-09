@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Ispostava;
+use app\models\Timovi;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\User;
 use app\models\LoginForm;
 use app\models\SignupForm;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -119,11 +122,21 @@ class SiteController extends Controller
     {
         $dayId = Yii::$app->request->get('day');
 
+        $ispostave = Ispostava::find()->where('id_ispostava>1')->all();
+        $listIspostave = ArrayHelper::map($ispostave, 'id_ispostava', 'lokacija');
+
+        $timovi = Timovi::find()->all();
+        $listTimovi = ArrayHelper::map($timovi, 'id_tim', 'id_tim');
+
+        $listSmjene = [0=>'Dan', 1=>'Nocna'];
+
         //$workers = User::find()->all();
 
         return $this->render('scheduleDetail', [
             'dayId'=>$dayId,
-
+            'listIspostave'=>$listIspostave,
+            'listTimovi'=>$listTimovi,
+            'listSmjene'=>$listSmjene
         ]);
     }
 }

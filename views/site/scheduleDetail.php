@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+
 $this->title = 'Raspored';
 ?>
 <div class="site-index">
@@ -11,19 +13,28 @@ $this->title = 'Raspored';
         </div>
         <div class="filters">
             <div class="col-md-4 form-group">
-                <select class="form-control">
-                    <option>Ispostave</option>
-                </select>
+                <?php
+                echo Html::dropDownList('ispostava', Yii::$app->request->get('i'), $listIspostave, [
+                    'prompt' => 'Ispostave',
+                    'class' => 'form-control',
+                ]);
+                ?>
             </div>
             <div class="col-md-4 form-group">
-                <select class="form-control">
-                    <option>Timovi</option>
-                </select>
+                <?php
+                echo Html::dropDownList('tim', Yii::$app->request->get('t'), $listTimovi, [
+                    'prompt' => 'Timovi',
+                    'class' => 'form-control',
+                ]);
+                ?>
             </div>
             <div class="col-md-4 form-group">
-                <select class="form-control">
-                    <option>Smjena</option>
-                </select>
+                <?php
+                echo Html::dropDownList('smjena', Yii::$app->request->get('s'), $listSmjene, [
+                    'prompt' => 'Smjena',
+                    'class' => 'form-control',
+                ]);
+                ?>
             </div>
         </div>
 

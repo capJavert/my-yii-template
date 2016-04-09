@@ -42,7 +42,9 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-    public $lokacija;
+
+    public $smjena = 'D';
+
     /**
      * @inheritdoc
      */
@@ -285,5 +287,33 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function available($i) {
+        $available = str_split($this->dostupan);
+
+        if($available[$i]=='D')
+            return true;
+        else
+            return false;
+    }
+
+    public function checkAdd($job, $step) {
+        $add = true;
+
+        $poslovi = UsersPoslovi::find()->where('id_user='.$this->id)->all();
+
+        if($this->broj_sati>=50)
+            $add = false;
+
+        if(array_key_exists($step, $poslovi) && $poslovi[$step]->getPosao()!=$job) {
+            $add = false;
+        }
+
+        return $add;
+    }
+
+    public function add() {
+
     }
 }

@@ -32,7 +32,8 @@ class UsersTimovi extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_tim'], 'required'],
-            [['id_user', 'id_tim', 'dan'], 'integer'],
+            [['id_user', 'id_tim', 'smjena', 'dan'], 'integer'],
+            [['posao'], 'string', 'max' => 1],
             [['id_tim'], 'exist', 'skipOnError' => true, 'targetClass' => Timovi::className(), 'targetAttribute' => ['id_tim' => 'id_tim']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
@@ -48,6 +49,7 @@ class UsersTimovi extends \yii\db\ActiveRecord
             'id_user' => 'Id User',
             'id_tim' => 'Id Tim',
             'dan' => 'Dan',
+            'smjena'=>'Smjena'
         ];
     }
 

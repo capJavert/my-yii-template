@@ -64,4 +64,8 @@ class UsersPoslovi extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
+
+    public function getPosao() {
+        return Poslovi::findOne($this->id_posao)->naziv;
+    }
 }

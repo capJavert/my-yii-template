@@ -63,4 +63,10 @@ class Ispostava extends \yii\db\ActiveRecord
     {
         return $this->hasMany(User::className(), ['id_ispostava' => 'id_ispostava']);
     }
+
+    public function defaultScope() {
+        return [
+          'criteria'=>'id_ispostava>1'
+        ];
+    }
 }
