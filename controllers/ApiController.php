@@ -136,10 +136,7 @@ class ApiController extends Controller
                 $user = new User();
                 $user = $user->findByToken(Yii::$app->request->get('token'));
               //  $ispostava=new Ispostava();
-                $ispostava= Ispostava::find()->where(["id_ispostava" => $user->id_ispostava])->one();
-                $user->lokacija=$ispostava->lokacija;
-            //    $array["lokacija"]="nekej";
-                $user->getIdIspostava();
+                //    $array["lokacija"]="nekej";
                 $model = new Userform($user->ime,$user->prezime,
                 $user->username,$user->auth_key,$user->oib,$user->dat_rod,
                 $user->adresa_stanovanja,$user->mjesto_stanovanja,$user->broj_tel,
@@ -153,7 +150,7 @@ class ApiController extends Controller
                     array_push($model->jobs,$temp);
 
                 }
-               
+
                 return BaseJson::encode($model);
                 break;
 
