@@ -6,6 +6,7 @@ use app\models\User;
 use Yii;
 use app\models\UsersTimovi;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,6 +68,10 @@ class UserTimoviController extends Controller
     public function actionCreate()
     {
         $users= User::find()->all();
+        $listUsers= ArrayHelper::map($users,'id','naziv');
+        $timovi = Timovi::find()->all();
+        $listTimovi = ArrayHelper::map($timovi, 'id_tim', 'id_tim');
+        
         $model = new UsersTimovi();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
