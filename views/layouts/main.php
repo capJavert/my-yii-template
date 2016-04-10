@@ -46,7 +46,8 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Raspored', 'url' => ['/site/schedule']],
+                ['label' => 'Pregled', 'url' => ['/site/schedule']],
+                ['label' => 'Raspored', 'url'=> ['/site/scheduledetail']],
                 ['label' => 'Djelatnici', 'url' => ['/user/index']],
                 ['label' => 'Odjava', 'url' => ['/site/logout']]
             ],

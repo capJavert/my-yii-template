@@ -11,7 +11,8 @@
         "pendalf89/yii2-tinymce": "dev-master",
         "pendalf89/yii2-filemanager": "dev-master",
         "cakebake/yii2-less.php": "dev-master",
-        "bryglen/yii2-apns-gcm": "1.0.4"
+        "bryglen/yii2-apns-gcm": "1.0.4",
+        "yiisoft/yii2-jui": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

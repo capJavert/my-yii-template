@@ -18,6 +18,8 @@ class UserController extends Controller
     /**
      * @inheritdoc
      */
+    
+    /*
     public function behaviors()
     {
         return [
@@ -39,7 +41,7 @@ class UserController extends Controller
             ],
         ];
     }
-
+*/
     /**
      * Lists all User models.
      * @return mixed
