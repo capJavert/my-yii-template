@@ -41,7 +41,7 @@ public class ShiftsPresenterImpl implements ShiftsPresenter {
     public void refreshShifts(ListView listViewShifts, LinearLayout linearLayoutEmpty) {
         this.listViewShifts = listViewShifts;
         this.linearLayoutEmpty = linearLayoutEmpty;
-        if (SchedulerApp.isRefreshClicked) {
+        if (SchedulerApp.isRefreshClicked || Shift.getAllShifts().size() == 0) {
             SchedulerApp.isRefreshClicked = false;
             interactor.getNewShifts(shiftsListener);
         } else {
