@@ -25,7 +25,7 @@ public class User extends Model implements Serializable {
 
     public User(String name, String surname, String username, String password, String token, String oib,
                 String birthDate, String address, String place, String phoneNumber, String mobileNumber,
-                String remark, String central, Integer numberOfHours) {
+                String remark, String central, Integer numberOfHours, Date lastRefresh) {
         super();
         this.name = name;
         this.surname = surname;
@@ -41,6 +41,7 @@ public class User extends Model implements Serializable {
         this.remark = remark;
         this.central = central;
         this.numberOfHours = numberOfHours;
+        this.lastRefresh = lastRefresh;
         save();
     }
 
@@ -99,6 +100,9 @@ public class User extends Model implements Serializable {
     @Column(name = "numberOfHours")
     @SerializedName("broj_sati")
     private Integer numberOfHours;
+
+    @Column(name = "lastRefresh")
+    private Date lastRefresh;
 
     @SerializedName("jobs")
     private List<Job> jobs;
@@ -286,5 +290,21 @@ public class User extends Model implements Serializable {
         if (users.isEmpty() == false)
             return users.get(0);
         return null;
+    }
+
+    public Date getLastRefresh() {
+        if(lastRefresh == null)
+            lastRefresh = new Date();
+        return lastRefresh;
+    }
+
+    public String getLastRefreshString(){
+        SimpleDateFormat formatCro = new SimpleDateFormat("hh:mm dd.MM.yyyy.");
+        return SchedulerApp.getInstance().getContexter().getStringValue(R.string.last_refreshed) + formatCro.format(getLastRefresh());
+    }
+
+    public void setLastRefresh(Date lastRefresh) {
+        this.lastRefresh = lastRefresh;
+        save();
     }
 }

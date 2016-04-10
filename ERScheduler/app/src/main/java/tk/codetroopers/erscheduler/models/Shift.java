@@ -33,7 +33,7 @@ public class Shift extends Model implements Serializable {
         save();
     }
 
-    @Column(name = "User")
+    @Column(name = "User",onDelete = Column.ForeignKeyAction.CASCADE,onUpdate = Column.ForeignKeyAction.CASCADE)
     private User user;
 
     @Column(name = "day")

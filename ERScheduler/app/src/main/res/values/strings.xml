@@ -58,4 +58,5 @@
     <string name="day_friday">Petak</string>
     <string name="day_saturday">Subota</string>
     <string name="day_undefined">Undefined day</string>
+    <string name="last_refreshed">Zadnje osvježeno\n</string>
 </resources>

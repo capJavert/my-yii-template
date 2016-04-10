@@ -2,6 +2,8 @@ package tk.codetroopers.erscheduler.mvp.interactor.impl;
 
 import android.util.Log;
 
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +32,7 @@ public class ShiftsInteractorImpl implements ShiftsInteractor {
                     Shift.clearAllShifts();
                     if (response.body().getShifts() != null) {
                         Log.v("SHIFTS: ", "SUCCESS");
+                        SchedulerApp.getLoggedUser().setLastRefresh(new Date());
                         Shift.saveAllShifts(response.body().getShifts());
                         listener.onSuccess(response.body().getShifts());
                     } else {

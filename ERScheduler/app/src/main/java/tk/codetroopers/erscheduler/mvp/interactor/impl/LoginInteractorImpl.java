@@ -2,6 +2,8 @@ package tk.codetroopers.erscheduler.mvp.interactor.impl;
 
 import android.util.Log;
 
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,7 +99,7 @@ public class LoginInteractorImpl implements LoginInteractor {
         User.clearUsers();
         User newUser = new User(user.getName(), user.getSurname(), user.getUsername(), null, user.getToken(), user.getOib(),
                 user.getBirthDate(), user.getAddress(), user.getPlace(), user.getPhoneNumber(), user.getMobileNumber(),
-                user.getRemark(), user.getCentral(), user.getNumberOfHours());
+                user.getRemark(), user.getCentral(), user.getNumberOfHours(), new Date());
 
         SchedulerApp.setLoggedUser(newUser);
     }
