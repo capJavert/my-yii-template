@@ -50,7 +50,7 @@
             android:layout_marginRight="40dp"/>
 
         <TextView
-            android:id="@+id/shiftTeamMates"
+            android:id="@+id/shiftJob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/secondary_text"

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import tk.codetroopers.erscheduler.R;
 import tk.codetroopers.erscheduler.SchedulerApp;
 import tk.codetroopers.erscheduler.helpers.DayParser;
+import tk.codetroopers.erscheduler.helpers.JobParser;
 import tk.codetroopers.erscheduler.models.Shift;
 import tk.codetroopers.erscheduler.models.TeamMate;
 
@@ -33,7 +34,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         TextView tvDate = (TextView) convertView.findViewById(R.id.shiftDate);
         TextView tvTime = (TextView) convertView.findViewById(R.id.shiftTime);
         TextView tvCentral = (TextView) convertView.findViewById(R.id.shiftCentral);
-        TextView tvTeamMates = (TextView) convertView.findViewById(R.id.shiftTeamMates);
+        TextView tvJob = (TextView) convertView.findViewById(R.id.shiftJob);
 
         String teamMates = "";
         /*
@@ -56,7 +57,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         tvDate.setText(DayParser.getDayName(shift.getDay()));
         tvTime.setText(smjena);
         tvCentral.setText(shift.getCentral());
-        tvTeamMates.setText(teamMates);
+        tvJob.setText(JobParser.getJobFullName(shift.getJob()));
 
         return convertView;
     }
