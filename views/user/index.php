@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Korisnici';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -14,19 +14,28 @@ $this->title = 'Users';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Dodaj', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        'columns' => [['class' => 'yii\grid\SerialColumn'],
+            
 
-            'id',
+            
             'ime',
             'prezime',
             'dat_rod',
-            'mob',
             'broj_sati',
+            [
+                'attribute' => 'vrsta',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if($model->vrsta==1) return "Administrator";
+                    else return "Običan korisnik";
+
+
+                },
+            ],
             // 'email:email',
             // 'status',
             // 'created_at',

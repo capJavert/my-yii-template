@@ -12,7 +12,7 @@ $this->title = 'Raspored';
 
         <?php for($i=1;$i<28;$i++) {?>
         <div data-id="<?= 'box'.($i-1) ?>" class="col-md-2 box-container box-small">
-            <a href="/site/scheduledetail/?day=<?= $i ?>"><div class="day">
+            <a href="./scheduledetail/?day=<?= $i ?>"><div class="day">
                 Dan <?= $i ?>
             </div></a>
         </div>

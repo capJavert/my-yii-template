@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Korisnici smjena';
+$this->title = 'Generiraj raspored';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-timovi-index">
@@ -16,27 +16,5 @@ $this->title = 'Korisnici smjena';
     <p>
         <?= Html::a('Kreiraj novu smjenu', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            [
-                'attribute' => 'id_user',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    $user = \app\models\User::findOne($model->id_user);
-                    $value = $user->ime.' '.$user->prezime;
-
-                    return $value;
-                },
-            ],
-            'id_tim',
-            'dan',
-            'smjena',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 </div>

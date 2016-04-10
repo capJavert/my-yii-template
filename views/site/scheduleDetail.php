@@ -3,6 +3,9 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+
+
 
 $this->title = 'Raspored';
 ?>
@@ -41,6 +44,22 @@ $this->title = 'Raspored';
         <section class="col-md-9 box-container box-large">
             <div class="day-large">
                 <h3>Dan <?= $dayId ?></h3>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => [['class' => 'yii\grid\SerialColumn'],
+                            'ispostava',
+                        'tim',
+                        'user',
+                        'smjena',
+                        'posao',
+
+
+
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]);
+              ?>
+
             </div>
         </section>
         <aside class="col-md-3 info-sidebar">
