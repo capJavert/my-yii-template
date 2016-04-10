@@ -14,19 +14,31 @@ $this->title = 'Generiraj raspored';
 
     <div class="jumbotron">
         <h1>Geneirajte raspored</h1>
-        <?php $form = ActiveForm::begin(); ?>
+        <form class="form-horizontal" action="/site/schedule/" method="get">
+            <fieldset>
 
-        <div class="col-md-12 form-group">
-        <?= $form->field($model, 'broj_dana')->textInput() ?>
-        </div>
-
-        <div class="form-group">
-        <?= Html::submitButton('Generiraj', ['class' => 'btn btn-lg btn-success', 'name' => 'Generiraj']) ?>
-    </div>
+                <!-- Form Name -->
 
 
-        <?php ActiveForm::end(); ?>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Broj dana">Broj dana</label>
+                    <div class="col-md-4">
+                        <input id="Broj dana" name="Broj dana" type="text" placeholder="dani" class="form-control input-md">
 
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Generiraj</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
 
 
 
