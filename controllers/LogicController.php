@@ -64,6 +64,7 @@ class LogicController extends \yii\web\Controller
             $ispostave= new Ispostava();
             $ispostave->lokacija="nesto";
             $ispostave->rang=1;
+            $ispostave->identifikator = $this->temp;
             if($ispostave->validate()) $ispostave->save();
             else var_dump($ispostave->getErrors()) or die;
             $ispostaveArray=explode('\r',$arr[$i]);
@@ -172,6 +173,7 @@ class LogicController extends \yii\web\Controller
             $timovi = Timovi::find()->all();
 
             $currentQuouta = 0;
+            $first = true;
             foreach($timovi as $tk => $tim) {
                 if($currentQuouta>$quota)
                     break;
@@ -179,15 +181,25 @@ class LogicController extends \yii\web\Controller
                 $job = $tim->getNextJob();
 
                 //$steps = 1;
-                //while($tim->getNextJob()!='' && $steps<4) {
+                //while($tim->getNextJob()!='') {
+                    //$job = $tim->getNextJob();
+
                     foreach ($users as $k => $user) {
                         if ($user->checkAdd($job, 1, $day)) {
                             $UT = new UsersTimovi();
                             $UT->dan = $day;
                             $UT->id_tim = $tim->id_tim;
                             $UT->id_user = $user->id;
-                            $UT->smjena = 1;
+                            $UT->smjena = rand(0,1);
                             $UT->posao = $job;
+
+                            /*if($first) {
+                                $tim = Timovi::findOne($tim->id_tim);
+                                $ispostava = Ispostava::findOne($tim->id_ispostava);
+
+                                if($ispostava->id_ispostava!=$user->id_ispostava)
+                                    continue;
+                            }*/
 
                             //echo $tim->id_tim . '-' . $user->id . '-' . $day . '<br />';
 
@@ -209,7 +221,9 @@ class LogicController extends \yii\web\Controller
                         }
                     }
                 //$steps++;
+                //$job = $tim->getNextJob();
                 //}
+                //$first = false;
             }
         //}
 
@@ -249,7 +263,7 @@ class LogicController extends \yii\web\Controller
                         'id_user' => $u->id,
                         'dan' => $i
                     ]
-                )->orderBy('dan')->one()) {
+                )->one()) {
                     $tim = Timovi::findOne($UT->id_tim);
                     $ispostava = Ispostava::findOne($tim->id_ispostava);
                     echo $ispostava->identifikator.'-'.$UT->id_tim.'-'.($UT->smjena ? 'D':'N').'-'.$UT->posao.' ';

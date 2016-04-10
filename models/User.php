@@ -72,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['ime', 'prezime', 'oib', 'dat_rod'], 'required'],
             [['dat_rod'], 'safe'],
             [['vrsta', 'id_ispostava', 'broj_sati', 'status', 'updated_at', 'created_at'], 'integer'],
-            [['ime', 'prezime', 'oib', 'adresa_stanovanja', 'mjesto_stanovanja', 'broj_tel', 'mob', 'username'], 'string', 'max' => 45],
+            [['ime', 'prezime', 'oib', 'adresa_stanovanja', 'mjesto_stanovanja', 'broj_tel', 'mob', 'username', 'pauza'], 'string', 'max' => 45],
             [['spol'], 'string', 'max' => 5],
             [['dostupan'], 'string', 'max' => 100],
             [['napomena'], 'string', 'max' => 300],
@@ -299,7 +299,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function checkAdd($job, $step, $day) {
-        if(!($day%7)) {
+        if(!(($day+1)%7)) {
             $this->broj_sati = 0;
             $this->save();
         }
