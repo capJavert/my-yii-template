@@ -66,9 +66,9 @@ $this->title = 'Raspored';
         </section>
         <aside class="col-md-3 info-sidebar">
             <ul>
-                <li>Broj djelatnika: <?  ?></li>
-                <li>Na godišnjem: <? ?></li>
-                <li>Na bolovanju: 8</li>
+                <li>Broj djelatnika: <?= '28' ?></li>
+                <li>Dostupni: <?= '15' ?></li>
+                <li>Na bolovanju: <?= '13' ?></li>
             </ul>
         </aside>
     </div>
