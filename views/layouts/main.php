@@ -21,7 +21,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="<?= (Yii::$app->controller->action->id=='index' ? 'image-bg':'') ?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -67,7 +67,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="center">&copy; ErrScheduler <?= date('Y') ?></p>
+        <p class="center-footer">&copy; ErrScheduler <?= date('Y') ?></p>
     </div>
 </footer>
 

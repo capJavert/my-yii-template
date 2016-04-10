@@ -2,9 +2,9 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Home';
 ?>
-<div class="site-index">
+<div id="site-index">
 
     <div class="jumbotron">
         <h1>ER SCHEDULER</h1>
@@ -12,11 +12,4 @@ $this->title = 'My Yii Application';
 
     </div>
 
-    <div class="body-content">
-
-
-
-        </div>
-
-    </div>
 </div>
