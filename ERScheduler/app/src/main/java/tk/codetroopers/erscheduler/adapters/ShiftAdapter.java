@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import tk.codetroopers.erscheduler.R;
 import tk.codetroopers.erscheduler.SchedulerApp;
+import tk.codetroopers.erscheduler.helpers.DayParser;
 import tk.codetroopers.erscheduler.models.Shift;
 import tk.codetroopers.erscheduler.models.TeamMate;
 
@@ -51,7 +52,8 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         else
             smjena = SchedulerApp.getInstance().getContexter().getStringValue(R.string.night_shift);
 
-        tvDate.setText("Dan " + shift.getDay() + ".");
+        //tvDate.setText("Dan " + shift.getDay() + ".");
+        tvDate.setText(DayParser.getDayName(shift.getDay()));
         tvTime.setText(smjena);
         tvCentral.setText(shift.getCentral());
         tvTeamMates.setText(teamMates);

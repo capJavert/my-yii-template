@@ -41,4 +41,6 @@
     <string name="shifts_refresh_failure">Nije uspjelo osvježavanje smjena</string>
     <string name="day_shift">Dnevna smjena (08h-20h)</string>
     <string name="night_shift">Noćna smjena (20h-08h)</string>
+    <string name="day_today">Danas</string>
+    <string name="day_tomorrow">Sutra</string>
 </resources>

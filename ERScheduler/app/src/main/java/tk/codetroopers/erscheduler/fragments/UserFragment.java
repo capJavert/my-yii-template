@@ -52,7 +52,7 @@ public class UserFragment extends BaseFragment {
         tvName.setText(user.getName());
         tvSurname.setText(user.getSurname());
         tvOIB.setText(user.getOib());
-        tvBirth.setText(user.getBirthDate());
+        tvBirth.setText(user.getBirthDateCro());
         tvAddress.setText(user.getAddress());
         tvPlace.setText(user.getPlace());
         tvPhoneNumber.setText(user.getPhoneNumber());

@@ -8,6 +8,8 @@ import com.activeandroid.query.Select;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -157,6 +159,21 @@ public class User extends Model implements Serializable {
 
     public String getBirthDate() {
         return birthDate;
+    }
+    public String getBirthDateCro(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(getBirthDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(date != null){
+            SimpleDateFormat formatCro = new SimpleDateFormat("dd.MM.yyyy.");
+            return formatCro.format(date);
+        } else {
+            return getBirthDate();
+        }
     }
 
     public void setBirthDate(String birthDate) {
