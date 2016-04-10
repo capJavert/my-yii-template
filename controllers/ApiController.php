@@ -5,7 +5,9 @@ namespace app\controllers;
 use app\models\File;
 use app\models\Ispostava;
 use app\models\Poslovi;
+use app\models\TimClanoviForm;
 use app\models\User;
+use app\models\Timovi;
 use app\models\UserForm;
 use app\models\UsersPoslovi;
 use app\models\UsersTimovi;
@@ -169,15 +171,23 @@ class ApiController extends Controller
                 $user = $user->findByToken(Yii::$app->request->get('token'));
              //  return BaseJson::encode([$userTimovi,$users]);
                 break;
-            case 'poslovi':
+            case 'Timovi':
                 $user = new User();
                 $user = $user->findByToken(Yii::$app->request->get('token'));
-                $user_poslovi= UsersPoslovi::find()->where(["id_user" => $user->id])->all();
-                foreach($user_poslovi as $user_posao)
+                $user_timovi= UsersTimovi::find()->where(["id_user" => $user->id])->all();
+                $array["raspored"] = array();
+                foreach($user_timovi as $user_posao)
                 {
-              //      $Posao=
+                   $tim["dan"]=$user_posao->dan;
+                    $tim["tim"]=$user_posao->id_tim;
+                    $tim["posao"]=$user_posao->posao;
+                    $tim["smjena"]=$user_posao->smjena;
+                    $tims=Timovi::find()->where(["id_tim"=>$user_posao->id_tim])->one();
+                    $ispostava=Ispostava::find()->where(["id_ispostava" => $tims->id_ispostava])->one();
+                    $tim["ispostava"]=$ispostava->lokacija;
+                    array_push($array["raspored"],$tim);
                 }
-                return BaseJson::encode($user_poslovi);
+                return BaseJson::encode($array);
                 break;
 
 
