@@ -47,7 +47,7 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Pregled', 'url' => ['/site/schedule']],
-                ['label' => 'Raspored', 'url'=> ['/site/scheduledetail']],
+                ['label' => 'Raspored', 'url'=> ['/user-timovi']],
                 ['label' => 'Djelatnici', 'url' => ['/user/index']],
                 ['label' => 'Odjava', 'url' => ['/site/logout']]
             ],
