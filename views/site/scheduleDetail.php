@@ -7,6 +7,8 @@ use yii\grid\GridView;
 use app\models\User;
 use app\models\UsersTimovi;
 
+$broj = User::find()->count();
+$userTimovi= \app\models\UsersTimovi::find()->where(["dan"=>$dayId])->count();
 
 
 $this->title = 'Raspored';
@@ -66,9 +68,9 @@ $this->title = 'Raspored';
         </section>
         <aside class="col-md-3 info-sidebar">
             <ul>
-                <li>Broj djelatnika: <?= '28' ?></li>
-                <li>Dostupni: <?= '15' ?></li>
-                <li>Na bolovanju: <?= '13' ?></li>
+                <li>Broj djelatnika: <?= $broj ;?></li>
+                <li>Radilo: <?=  $userTimovi ; ?></li>
+                <li>Odsutno: <?= $broj-$userTimovi; ?></li>
             </ul>
         </aside>
     </div>
