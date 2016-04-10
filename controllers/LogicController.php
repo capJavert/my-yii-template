@@ -159,7 +159,7 @@ class LogicController extends \yii\web\Controller
     }
 
     public function theAlgorithm($max, $users=null, $timovi=null, $quota, $day=0) {
-        $users = User::find()->where('id>2')->orderBy('broj_sati')->all();
+        $users = User::find()->where('id>2')->all();
 
         //only available users
         foreach($users as $k => $user) {
@@ -254,6 +254,27 @@ class LogicController extends \yii\web\Controller
         $this->theAlgorithm($max=$daysNum, $users=[], $timovi=[], $quota, $day=0);
     }
 
+    public function actionOutputhtml() {
+        $users = User::find()->where('id>2')->all();
+
+        foreach($users as $u) {
+            for($i=0;$i<28;$i++) {
+                if($UT = UsersTimovi::find()->where([
+                        'id_user' => $u->id,
+                        'dan' => $i
+                    ]
+                )->one()) {
+                    $tim = Timovi::findOne($UT->id_tim);
+                    $ispostava = Ispostava::findOne($tim->id_ispostava);
+                    echo rand(0,1).'-'.$UT->id_tim.'-'.($UT->smjena ? 'D':'N').'-'.$UT->posao.' ';
+                } else {
+                    echo '_ ';
+                }
+            }
+            echo '<br />';
+        }
+    }
+
     public function actionOutput() {
         $users = User::find()->where('id>2')->all();
 
@@ -266,13 +287,26 @@ class LogicController extends \yii\web\Controller
                 )->one()) {
                     $tim = Timovi::findOne($UT->id_tim);
                     $ispostava = Ispostava::findOne($tim->id_ispostava);
-                    echo $ispostava->identifikator.'-'.$UT->id_tim.'-'.($UT->smjena ? 'D':'N').'-'.$UT->posao.' ';
+                    echo rand(0,1).'-'.$UT->id_tim.'-'.($UT->smjena ? 'D':'N').'-'.$UT->posao.' ';
                 } else {
                     echo '_ ';
                 }
             }
-            echo '<br />';
+            echo "\r\n";
         }
     }
 
+    public function actionUpload() {
+        if ($_FILES) {
+            $target_dir = "files/";
+            $target_file = $target_dir . $_FILES["fileupload"]["name"];
+            // Check if image file is a actual image or fake image
+            $check = getimagesize($_FILES["fileupload"]["tmp_name"]);
+            if (move_uploaded_file($_FILES["fileupload"]["tmp_name"], $target_file)) {
+                return BaseJson::encode(['file'=>'SUCCESS_UPLOADED']);
+            } else
+                return BaseJson::encode(['error'=>'ERROR_MOVE']);
+        } else
+            return BaseJson::encode(['error'=>'ERROR_NO_FILE']);
+    }
 }
