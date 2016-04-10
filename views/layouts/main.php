@@ -21,7 +21,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="<?= (Yii::$app->controller->action->id=='index' ? 'image-bg':'') ?>">
+<body class="<?= (Yii::$app->request->url=='/' ? 'image-bg':'') ?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
