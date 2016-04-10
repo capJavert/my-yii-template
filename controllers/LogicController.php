@@ -178,10 +178,10 @@ class LogicController extends \yii\web\Controller
 
                 $job = $tim->getNextJob();
 
-                $steps = 1;
-                while($tim->getNextJob()!='' && $steps<4) {
+                //$steps = 1;
+                //while($tim->getNextJob()!='' && $steps<4) {
                     foreach ($users as $k => $user) {
-                        if ($user->checkAdd($job, $steps, $day)) {
+                        if ($user->checkAdd($job, 1, $day)) {
                             $UT = new UsersTimovi();
                             $UT->dan = $day;
                             $UT->id_tim = $tim->id_tim;
@@ -189,15 +189,15 @@ class LogicController extends \yii\web\Controller
                             $UT->smjena = 1;
                             $UT->posao = $job;
 
-                            echo $tim->id_tim . '-' . $user->id . '-' . $day . '<br />';
+                            //echo $tim->id_tim . '-' . $user->id . '-' . $day . '<br />';
 
                             if (!UsersTimovi::find()->where([
                                     'id_tim' => $tim->id_tim,
                                     'id_user' => $user->id,
                                     'dan' => $day
                                 ]
-                            )->one()
-                            ) {
+                            )->one()) {
+                                //echo '';
                                 $UT->save();
                                 $user->broj_sati_ukupno += 12;
                                 $user->save();
@@ -205,11 +205,11 @@ class LogicController extends \yii\web\Controller
 
                             $currentQuouta++;
                             unset($users[$k]);
-                            break;
+                            continue;
                         }
                     }
-                $steps++;
-                }
+                //$steps++;
+                //}
             }
         //}
 
@@ -240,6 +240,25 @@ class LogicController extends \yii\web\Controller
         $this->theAlgorithm($max=$daysNum, $users=[], $timovi=[], $quota, $day=0);
     }
 
+    public function actionOutput() {
+        $users = User::find()->where('id>2')->all();
 
+        foreach($users as $u) {
+            for($i=0;$i<28;$i++) {
+                if($UT = UsersTimovi::find()->where([
+                        'id_user' => $u->id,
+                        'dan' => $i
+                    ]
+                )->orderBy('dan')->one()) {
+                    $tim = Timovi::findOne($UT->id_tim);
+                    $ispostava = Ispostava::findOne($tim->id_ispostava);
+                    echo $ispostava->identifikator.'-'.$UT->id_tim.'-'.($UT->smjena ? 'D':'N').'-'.$UT->posao.' ';
+                } else {
+                    echo '_ ';
+                }
+            }
+            echo '<br />';
+        }
+    }
 
 }

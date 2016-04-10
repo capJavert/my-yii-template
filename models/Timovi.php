@@ -73,10 +73,10 @@ class Timovi extends \yii\db\ActiveRecord
         $UT = UsersTimovi::find()->where('id_tim='.$this->id_tim)->all();
 
         foreach($UT as $ut) {
-            if($ut->posao=='D') str_replace('D', '', $jobs);
-            if($ut->posao=='V') str_replace('V', '', $jobs);
-            if($ut->posao=='M') str_replace('M', '', $jobs);
-            if($ut->posao=='T') str_replace('T', '', $jobs);
+            if ($ut->posao == 'D') $jobs = str_replace('D', '', $jobs);
+            if ($ut->posao == 'V') $jobs = str_replace('V', '', $jobs);
+            if ($ut->posao == 'M') $jobs = str_replace('M', '', $jobs);
+            if ($ut->posao == 'T') $jobs = str_replace('T', '', $jobs);
         }
 
         return str_split($jobs)[0];

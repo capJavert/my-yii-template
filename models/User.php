@@ -299,23 +299,33 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     public function checkAdd($job, $step, $day) {
-        $add = true;
-
-        $poslovi = UsersPoslovi::find()->where('id_user='.$this->id)->all();
-
         if(!($day%7)) {
             $this->broj_sati = 0;
             $this->save();
         }
 
         if($this->broj_sati>=50)
-            $add = false;
+            return false;
 
-        if(array_key_exists($step, $poslovi) && $poslovi[$step]->getPosao()!=$job) {
-            $add = false;
+        $poslovi = UsersPoslovi::find()->where('id_user='.$this->id)->orderBy('prioritet')->all();
+
+        $ok = false;
+        foreach($poslovi as $p) {
+            //echo $p->getPosao().'<br />';
+            if ($p->getPosao() == $job) {
+                $ok = true;
+                break;
+            }
         }
 
-        return $add;
+        if(!$ok)
+            return false;
+
+        /*if(array_key_exists($step, $poslovi) && $poslovi[$step]->getPosao()!=$job) {
+            return false;
+        }*/
+
+        return true;
     }
 
     public function add() {
