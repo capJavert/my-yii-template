@@ -4,6 +4,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\User;
+use app\models\UsersTimovi;
 
 
 
@@ -55,7 +57,7 @@ $this->title = 'Raspored';
 
 
 
-                        ['class' => 'yii\grid\ActionColumn'],
+
                     ],
                 ]);
               ?>
@@ -64,8 +66,8 @@ $this->title = 'Raspored';
         </section>
         <aside class="col-md-3 info-sidebar">
             <ul>
-                <li>Broj djelatnika: 28</li>
-                <li>Na godišnjem: 20</li>
+                <li>Broj djelatnika: <?  ?></li>
+                <li>Na godišnjem: <? ?></li>
                 <li>Na bolovanju: 8</li>
             </ul>
         </aside>

@@ -16,6 +16,7 @@ class RasporedForm extends Model
     public $user;
     public $smjena;
     public $posao;
+    public $spremite_id;
 
     /**
      * RasporedForm constructor.
@@ -24,13 +25,14 @@ class RasporedForm extends Model
      * @param $tim
      * @param $user
      */
-    public function __construct($ispostava, $tim, $user,$smjena,$posao)
+    public function __construct($ispostava, $tim, $user,$smjena,$posao,$spremite_id)
     {
         $this->ispostava = $ispostava;
         $this->tim = $tim;
         $this->user = $user;
         $this->smjena = $smjena;
         $this->posao= $posao;
+        $this->spremite_id = $spremite_id;
     }
 
    
