@@ -43,4 +43,19 @@
     <string name="night_shift">Noćna smjena (20h-08h)</string>
     <string name="day_today">Danas</string>
     <string name="day_tomorrow">Sutra</string>
+    <string name="job_doctor">Doktor</string>
+    <string name="job_technician">Tehničar</string>
+    <string name="job_driver">Vozač</string>
+    <string name="job_dispacher">Dispečer</string>
+    <string name="job_undefined">Nedefinirani posao</string>
+    <string name="this_week">Ovaj tjedan</string>
+    <string name="dot_week">. tjedan</string>
+    <string name="day_sunday">Nedjelja</string>
+    <string name="day_monday">Ponedjeljak</string>
+    <string name="day_tuesday">Utorak</string>
+    <string name="day_wendesday">Srijeda</string>
+    <string name="day_thursday">Četvrtak</string>
+    <string name="day_friday">Petak</string>
+    <string name="day_saturday">Subota</string>
+    <string name="day_undefined">Undefined day</string>
 </resources>

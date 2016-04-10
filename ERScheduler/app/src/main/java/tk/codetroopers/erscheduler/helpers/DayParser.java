@@ -22,9 +22,9 @@ public class DayParser {
                 correction = 1;
             String week = "";
             if((dayOrder+7)/7 == 1)
-                week = "Ovaj tjedan";
+                week = getString(R.string.this_week);
             else
-                week = (dayOrder+7)/7 + ". tjedan";
+                week = (dayOrder+7)/7 + getString(R.string.dot_week);
 
             String dayName = getDayNameWeek(correction) + " ("+ week + ")";
             return dayName;
@@ -33,14 +33,14 @@ public class DayParser {
 
     private static String getDayNameWeek(int dayOfWeek) {
         switch (dayOfWeek){
-            case 1: return "Nedjelja";
-            case 2: return "Ponedjeljak";
-            case 3: return "Utorak";
-            case 4: return "Srijeda";
-            case 5: return "Četvrtak";
-            case 6: return "Petak";
-            case 7: return "Subota";
-            default: return "NONE";
+            case 1: return getString(R.string.day_sunday);
+            case 2: return getString(R.string.day_monday);
+            case 3: return getString(R.string.day_tuesday);
+            case 4: return getString(R.string.day_wendesday);
+            case 5: return getString(R.string.day_thursday);
+            case 6: return getString(R.string.day_friday);
+            case 7: return getString(R.string.day_saturday);
+            default: return getString(R.string.day_undefined);
         }
     }
 
