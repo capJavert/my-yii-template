@@ -23,6 +23,8 @@ import tk.codetroopers.erscheduler.enums.ActivityEnum;
 import tk.codetroopers.erscheduler.gcm.GcmRegistrationIntentService;
 import tk.codetroopers.erscheduler.models.BaseReponse;
 import tk.codetroopers.erscheduler.models.User;
+import tk.codetroopers.erscheduler.mvp.presenter.MainPresenter;
+import tk.codetroopers.erscheduler.mvp.presenter.impl.MainPresenterImpl;
 import tk.codetroopers.erscheduler.mvp.view.ActivityView;
 import tk.codetroopers.erscheduler.mvp.view.MainView;
 import tk.codetroopers.erscheduler.network.ApiModule;
@@ -35,32 +37,31 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     Toolbar toolbar;
+    MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SchedulerApp.getInstance().setContexter(this);
-
+        mainPresenter = new MainPresenterImpl(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         showTitle(getString(R.string.toolbar_app_title));
         toolbar.setNavigationIcon(R.drawable.ic_local_hospital_white_48dp);
-
         mViewPager = (ViewPager) findViewById(R.id.container);
-
-        refreshShifts();
-
+        mainPresenter.setupView(mViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
         mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
+        refreshShifts();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String action = bundle.getString("action");
-            if(SchedulerApp.getLoggedUser() != null)
-                mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
+            if(SchedulerApp.getLoggedUser() != null) {
+                //mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
+            }
         }
 
         startGcm();
@@ -97,27 +98,7 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
     @Override
     public void logout() {
         showActivity(ActivityEnum.InitialActivity);
-
-        ApiService apiService = ApiModule.createService(ApiService.class,
-                SchedulerApp.getLoggedUser().getToken());
-
-        Call<BaseReponse> call = apiService.logout(SchedulerApp.getLoggedUser().getToken());
-        call.enqueue(new Callback<BaseReponse>() {
-            @Override
-            public void onResponse(Call<BaseReponse> call, Response<BaseReponse> response) {
-                if (response != null && response.body() != null && response.body().getSuccess() != null) {
-                    showToast(getString(R.string.logout_successful));
-                } else {
-                    showToast(getString(R.string.logout_token_error));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseReponse> call, Throwable t) {
-                showToast(getString(R.string.logout_error));
-            }
-        });
-
+        mainPresenter.logout();
     }
 
     private void doubleBackPress() {

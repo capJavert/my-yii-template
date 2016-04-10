@@ -24,7 +24,7 @@
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_user">Korisnički podaci</string>
-    <string name="tab_shifts">Dodjeljene smjene</string>
+    <string name="tab_shifts">Dodijeljene smjene</string>
     <string name="tab_history">Povijest</string>
     <string name="shift_item_name">One Shift</string>
     <string name="shift_date">Date of dbShift</string>

@@ -24,9 +24,7 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
         final Shift shift = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.shift_item, parent, false);
         }
@@ -36,24 +34,12 @@ public class ShiftAdapter extends ArrayAdapter<Shift> {
         TextView tvCentral = (TextView) convertView.findViewById(R.id.shiftCentral);
         TextView tvJob = (TextView) convertView.findViewById(R.id.shiftJob);
 
-        String teamMates = "";
-        /*
-        int counter = 0;
-        String comma = ", ";
-        for (TeamMate teamMate : shift.getTeamMates()) {
-            teamMates += teamMate.getName() + " " + teamMate.getSurname();
-            if (shift.getTeamMates().size() > counter + 1)
-                teamMates += comma;
-            counter++;
-        }
-        */
         String smjena = "";
         if(shift.getType() == Shift.DNEVNA_SMJENA)
             smjena = SchedulerApp.getInstance().getContexter().getStringValue(R.string.day_shift);
         else
             smjena = SchedulerApp.getInstance().getContexter().getStringValue(R.string.night_shift);
 
-        //tvDate.setText("Dan " + shift.getDay() + ".");
         tvDate.setText(DayParser.getDayName(shift.getDay()));
         tvTime.setText(smjena);
         tvCentral.setText(shift.getCentral());
