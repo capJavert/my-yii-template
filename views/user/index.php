@@ -26,6 +26,7 @@ $this->title = 'Korisnici';
             'prezime',
             'dat_rod',
             'broj_sati',
+            /*
             [
                 'attribute' => 'vrsta',
                 'format' => 'raw',
@@ -36,6 +37,7 @@ $this->title = 'Korisnici';
 
                 },
             ],
+            */
             // 'email:email',
             // 'status',
             // 'created_at',

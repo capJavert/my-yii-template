@@ -126,7 +126,7 @@ class SiteController extends Controller
     public function actionScheduledetail()
     {
         $dayId = Yii::$app->request->get('day');
-
+        if(!isset($_GET["day"])) $this->goHome();
         $ispostave = Ispostava::find()->where('id_ispostava>1')->all();
         $listIspostave = ArrayHelper::map($ispostave, 'id_ispostava', 'lokacija');
 
@@ -176,7 +176,7 @@ class SiteController extends Controller
                     $raspored,
                     new RasporedForm(
                         $ispostave->lokacija, $tim->id_tim, $user->ime
-                        . " " . $user->prezime, $smjena, $naziv
+                        . " " . $user->prezime, $smjena, $naziv,$userTim->id
                     )
                 );
             }
@@ -186,7 +186,7 @@ class SiteController extends Controller
                    $raspored,
                    new RasporedForm(
                        $ispostave->lokacija, $tim->id_tim, $user->ime
-                       . " " . $user->prezime, $smjena, $naziv
+                       . " " . $user->prezime, $smjena, $naziv,$userTim->id
                    )
                );
            }
@@ -197,7 +197,7 @@ class SiteController extends Controller
                     $raspored,
                     new RasporedForm(
                         $ispostave->lokacija, $tim->id_tim, $user->ime
-                        . " " . $user->prezime, $smjena, $naziv
+                        . " " . $user->prezime, $smjena, $naziv,$userTim->id
                     )
                 );
             }
@@ -208,10 +208,12 @@ class SiteController extends Controller
                     $raspored,
                     new RasporedForm(
                         $ispostave->lokacija, $tim->id_tim, $user->ime
-                        . " " . $user->prezime, $smjena, $naziv
+                        . " " . $user->prezime, $smjena, $naziv,$userTim->id
                     )
                 );
             }
+            $broj=count(User::find()->all());
+            $broj_zap=sizeof($userTimovi);
 
 
 
@@ -246,6 +248,8 @@ class SiteController extends Controller
             'listSmjene'=>$listSmjene,
             'userTimovi'=>$userTimovi,
             'dataProvider'=>$dataProvider,
+            'raspored'=>$raspored,
+            
         ]);
     }
 
