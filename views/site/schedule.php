@@ -11,14 +11,16 @@ else
 ?>
 <div class="site-index">
     <div class="container" id="scheduler">
+        <?php if($brojDana) { ?>
         <div class="col-md-12">
-            <h2>Raspored, kreiran datuma 09.09.2016</h2>
+            <h2>Raspored, kreiran datuma <?= date('d.m.Y', time()) ?></h2>
         </div>
+        <?php } ?>
 
         <?php if($brojDana) { ?>
         <?php for($i=1;$i<=$brojDana;$i++) {?>
         <div data-id="<?= 'box'.($i-1) ?>" class="col-md-2 box-container box-small">
-            <a href="./scheduledetail/?day=<?= $i ?>"><div class="day">
+            <a href="/site/scheduledetail/?day=<?= $i ?>"><div class="day">
                 Dan <?= $i ?>
             </div></a>
         </div>

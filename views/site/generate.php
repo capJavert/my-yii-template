@@ -13,7 +13,7 @@ $this->title = 'Generiraj raspored';
 <div class="users-timovi-index">
 
     <div class="jumbotron">
-        <h1>Geneirajte raspored</h1>
+        <h1>Vremenski period</h1>
         <form class="form-horizontal" action="/site/schedule/" method="get">
             <fieldset>
 
@@ -24,7 +24,7 @@ $this->title = 'Generiraj raspored';
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="Broj dana">Broj dana</label>
                     <div class="col-md-4">
-                        <input id="Broj dana" name="Broj dana" type="text" placeholder="dani" class="form-control input-md">
+                        <input id="Broj dana" name="brojDana" type="text" placeholder="dani" class="form-control input-md">
 
                     </div>
                 </div>
