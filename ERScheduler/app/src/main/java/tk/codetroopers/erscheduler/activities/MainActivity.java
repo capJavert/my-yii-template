@@ -50,11 +50,11 @@ public class MainActivity extends BaseActivity implements MainView, ActivityView
         showTitle(getString(R.string.toolbar_app_title));
         toolbar.setNavigationIcon(R.drawable.ic_local_hospital_white_48dp);
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mainPresenter.setupView(mViewPager);
+        refreshShifts();
+        mainPresenter.setupView();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(SectionsPagerAdapter.SHIFTS_LIST);
-        refreshShifts();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

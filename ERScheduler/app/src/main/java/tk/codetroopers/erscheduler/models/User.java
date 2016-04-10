@@ -293,14 +293,19 @@ public class User extends Model implements Serializable {
     }
 
     public Date getLastRefresh() {
-        if(lastRefresh == null)
-            lastRefresh = new Date();
+        if(lastRefresh == null) {
+            lastRefresh =  new Date(new Date().getTime() - 604800000L);
+        }
         return lastRefresh;
     }
 
     public String getLastRefreshString(){
-        SimpleDateFormat formatCro = new SimpleDateFormat("hh:mm dd.MM.yyyy.");
-        return SchedulerApp.getInstance().getContexter().getStringValue(R.string.last_refreshed) + formatCro.format(getLastRefresh());
+        if(getLastRefresh().getTime() +  104800000L  > new Date().getTime()) {
+            SimpleDateFormat formatCro = new SimpleDateFormat("hh:mm dd.MM.yyyy.");
+            return SchedulerApp.getInstance().getContexter().getStringValue(R.string.last_refreshed) + formatCro.format(getLastRefresh());
+        }else {
+            return "";
+        }
     }
 
     public void setLastRefresh(Date lastRefresh) {
